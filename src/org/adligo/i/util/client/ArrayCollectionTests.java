@@ -1,4 +1,4 @@
-package org.adligo.i.log.client;
+package org.adligo.i.util.client;
 
 import java.util.ArrayList;
 
