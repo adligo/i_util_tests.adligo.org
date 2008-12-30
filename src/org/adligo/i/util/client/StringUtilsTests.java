@@ -13,6 +13,19 @@ import junit.framework.TestCase;
 
 public class StringUtilsTests extends TestCase {
 
+	public void testEqualsIgnoreCase() {
+		String a = "a";
+		String b = "b";
+		String aA = "A";
+		
+		assertTrue(StringUtils.equalsIgnoreCase(null, null));
+		assertFalse(StringUtils.equalsIgnoreCase(null, a));
+		assertFalse(StringUtils.equalsIgnoreCase(a, null));
+		assertFalse(StringUtils.equalsIgnoreCase(null, a));
+		assertTrue(StringUtils.equalsIgnoreCase(aA, a));
+		assertTrue(StringUtils.equalsIgnoreCase(a, aA));
+	}
+	
 	public void testEmpty() {
 		GCTracker mem = new GCTracker(StringUtils.class, "testEmpty");
 		
