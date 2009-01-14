@@ -1,11 +1,18 @@
 package org.adligo.i.util.client;
 
+import junit.framework.Test;
 import junit.framework.TestSuite;
 
-public class Suite extends TestSuite {
+public class Suite {
 
-	public Suite() {
-		super.addTest(new ArrayCollectionTests());
-		super.addTest(new StringUtilsTests());
+	public static Test suite() {
+		TestSuite suite= new TestSuite();
+
+
+		suite.addTestSuite(ArrayCollectionTests.class);
+		suite.addTestSuite(StringUtilsTests.class);
+		
+		return suite;
+		
 	}
 }
