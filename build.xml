@@ -8,10 +8,10 @@
 	<import file="${user.home}/conf/adligo/build.xml"/>
 	
 	<target name="test" depends="jar" >
-		<delete dir="test_output" failonfailure="false" />
+		<delete dir="test_output" failonerror="false" />
 		<mkdir dir="test_output" />
 		
-		<junit printsummary="yes" haltonerror="yes">
+		<junit printsummary="yes" haltonfailure="yes">
 			<classpath>
 				<pathelement path="${build_classpath}${me};" />
 			  </classpath>
