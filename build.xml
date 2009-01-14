@@ -8,13 +8,23 @@
 	<import file="${user.home}/conf/adligo/build.xml"/>
 	
 	<target name="test" depends="jar" >
-		<java fork="true" classname="junit.textui.TestRunner"
-		        taskname="junit" failonerror="false" output="test_results" >
-		        <classpath>
-		          <pathelement path="${build_classpath}${me};" />
-		        </classpath>
-		        <arg value="org.adligo.i.util.client.Suite"/>
-		 </java>
+		<delete dir="test_output" failonerror="false" />
+		<mkdir dir="test_output" />
+		
+		<junit printsummary="yes" haltonerror="yes">
+			<classpath>
+				<pathelement path="${build_classpath}${me};" />
+			  </classpath>
+			
+			<formatter type="plain"/>
+
+			<batchtest fork="yes" todir="test_output">
+			    <fileset dir="src">
+			      <include name="**/*Test*.java"/>
+			      <exclude name="**/AllTests.java"/>
+			    </fileset>
+			  </batchtest>
+		</junit>
 		
 	</target>
 </project>
