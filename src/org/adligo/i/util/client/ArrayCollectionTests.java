@@ -71,6 +71,37 @@ public class ArrayCollectionTests extends TestCase {
 		
 	}
 	
+	public void testGet() {
+		ArrayCollection col = new ArrayCollection();
+		TestString one = new TestString("One");
+		TestString oneA = new TestString("One");
+		TestString two = new TestString("Two");
+		TestString twoA = new TestString("Two");
+		TestString three = new TestString("Three");
+		
+		System.out.println("One " + one + " Two " + two + " Three " + three + " OneA " + oneA);
+		
+		col.add(one);
+		
+		assertOnes(col, one, oneA, "One");
+		assertNull("Should return null",
+				col.get("Two"));
+		assertNull("Should return null",
+				col.get(two));
+		
+		col.add(two);
+		assertOnes(col, one, oneA, "One");
+		assertOnes(col, two, twoA, "Two");
+	}
+
+	private void assertOnes(ArrayCollection col, TestString one, TestString oneA, String p) {
+		assertEquals("The instances should match",
+				one, col.get(new TestString(p)));
+		assertTrue("The instances should match",
+				one == col.get(new TestString(p)));
+		assertTrue("The instances should Not match " + oneA + " ... " + col.get(oneA),
+				oneA != col.get(oneA));
+	}
 
 
 }
