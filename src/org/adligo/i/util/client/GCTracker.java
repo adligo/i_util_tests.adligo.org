@@ -55,13 +55,13 @@ public class GCTracker {
 	    }
 		
 		// @todo waiting on a bug from sun to fix this issue
-		//TestCase.assertTrue("Total memory used sould always be above 0 ", used >= 0);
+		TestCase.assertTrue("Total memory used sould always be above 0 ", used >= 0);
 		
 		TestCase.assertTrue("The " + name + " should take up less than " +
 				threshold + " memeory and it took " + used + 
 				" in "+ name, threshold > used);
 				
-		System.out.println("Memory assertion is not on! " +
+		System.out.println(
 				"The " + name + " should take up less than " +
 			threshold + " memeory and it took " + used + 
 			" in "+ name);	
@@ -93,8 +93,9 @@ public class GCTracker {
 	 * 
 	 */
 	public static synchronized void forceGc() {
-		/**
 		long total_gcs = getTotalGcs();
+		System.out.println("Got total gcs to " + total_gcs);
+		
 		if (inital_gcs == null) {
 			inital_gcs = total_gcs + 1;
 			if (log) {
@@ -130,13 +131,6 @@ public class GCTracker {
 				}
 				total_gcs = getTotalGcs();
 			}
-		}
-		*/
-		GarbageTracker gt = new GarbageTracker();
-		try {
-			gt.verifyCollection(0);
-		} catch (Exception x) {
-			x.printStackTrace();
 		}
 	}
 

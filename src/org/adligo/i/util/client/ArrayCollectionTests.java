@@ -61,13 +61,20 @@ public class ArrayCollectionTests extends TestCase {
 		memTracker.assertUse(38000);
 	}
 	
+	public void testMemoryRepeater() {
+		for (int i = 0; i < 10000; i++) {
+			System.out.println("GCTracker iteration " + i + "\n\n\n\n");
+			testMemory();
+		}
+	}
+	
 	public void testMemory() {
 		GCTracker memTracker = new GCTracker(ArrayCollectionTests.class,
 			"testMemory");
 		ArrayCollection collection = new ArrayCollection();
 		collection = null;
 		//size of memTracker object...
-		memTracker.assertUse(20);
+		memTracker.assertUse(200);
 		
 	}
 	
