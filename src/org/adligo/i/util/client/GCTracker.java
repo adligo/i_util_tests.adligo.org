@@ -7,7 +7,18 @@ import java.util.Iterator;
 import java.util.List;
 
 import junit.framework.TestCase;
-
+/**
+ * this class is designed to track memory of a section of a system
+ * upon instance creation this object will contain the total amount of 
+ * memory used (total memory reserved by java - memory reserved but not used)
+ * 
+ * The at any point your application can use
+ * the assertUse method to assert that memory used since the creation 
+ * of the GCTracker object is less than a certain threshold
+ * 
+ * @author scott
+ *
+ */
 public class GCTracker {
 	private static long gcs = 0;
 	private static Long inital_gcs;
@@ -29,7 +40,12 @@ public class GCTracker {
 		//TestCase.assertTrue("Total memory used sould always be above 0 ", start >= 0);
 	}
 
-	
+	/**
+	 * this method can be used to assert that the NEW memory used
+	 * since this object was created is below a certain point
+	 * 
+	 * @param threshold
+	 */
 	public void assertUse(long threshold) {
 		end = getMemoryUse();
 		long used = end - start;
@@ -41,11 +57,10 @@ public class GCTracker {
 		// @todo waiting on a bug from sun to fix this issue
 		//TestCase.assertTrue("Total memory used sould always be above 0 ", used >= 0);
 		
-		/**
 		TestCase.assertTrue("The " + name + " should take up less than " +
 				threshold + " memeory and it took " + used + 
 				" in "+ name, threshold > used);
-				*/
+				
 		System.out.println("Memory assertion is not on! " +
 				"The " + name + " should take up less than " +
 			threshold + " memeory and it took " + used + 
@@ -78,6 +93,7 @@ public class GCTracker {
 	 * 
 	 */
 	public static synchronized void forceGc() {
+		/**
 		long total_gcs = getTotalGcs();
 		if (inital_gcs == null) {
 			inital_gcs = total_gcs + 1;
@@ -114,6 +130,13 @@ public class GCTracker {
 				}
 				total_gcs = getTotalGcs();
 			}
+		}
+		*/
+		GarbageTracker gt = new GarbageTracker();
+		try {
+			gt.verifyCollection(0);
+		} catch (Exception x) {
+			x.printStackTrace();
 		}
 	}
 
