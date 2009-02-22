@@ -1,0 +1,81 @@
+package org.adligo.i.util.client;
+ 
+import java.util.ArrayList;
+import java.util.List;
+ 
+import junit.framework.TestCase;
+ 
+/**
+ * yep this class basically just tests java it self
+ * which is fairly silly to some.  To others it just proves 
+ * how java works.
+ * 
+ * not sure exactly why I thought keeping a reference to a CONSTANT
+ * would make the referring object considered active for the life of the JVM
+ * I WAS WRONG :)
+ * 
+ * @see
+ *    http://forums.sun.com/thread.jspa?threadID=5357387
+ *    
+ * @author scott
+ *
+ */
+public class TestStaticReferences extends TestCase implements I_Listener {
+	public static final String CONSTANT = "doesn't change";
+	public static final Exception CONSTANT_EXCEPTION = new Exception("test exception");
+	
+	public void testStaticReferences() {
+		GCTracker tracker = new GCTracker(TestStaticReferences.class, "test");
+		tracker.setLog(false);
+		
+		for (int i = 0; i < 10000; i++) {
+			tracker.forceGc();
+			long used = tracker.getMemoryUse();
+			create();
+			System.out.println("Memory used is " + used + " on iteration " + i);
+		}
+		tracker.assertUse(0);
+	}
+ 
+	private void create() {
+		createObject();
+		createList();
+		createArray();
+		createEvent();
+		createListenerValueObject();
+	}
+	
+	private void createObject() {
+		Object o = new Object() {
+			private String foo = CONSTANT;
+			
+		};
+	}
+	
+	private void createList() {
+		List list = new ArrayList();
+		list.add(CONSTANT);
+	}
+	
+	private void createArray() {
+		String [] array = new String[1];
+		array[0] = CONSTANT;
+	}
+	
+	private void createEvent() {
+		Event e = new Event();
+		e.setSource(this);
+		e.setValue(CONSTANT);
+		e.setException(CONSTANT_EXCEPTION);
+	}
+
+	private void createListenerValueObject() {
+		ListenerValueObject e = new ListenerValueObject();
+		e.setValue(CONSTANT);
+		e.setListener(this);
+	}
+	
+	public void onEvent(Event p) {
+		//do nothing just for convience
+	}
+}
