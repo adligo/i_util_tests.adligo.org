@@ -22,7 +22,7 @@ import junit.framework.TestCase;
 public class GCTracker {
 	private static long gcs = 0;
 	private static Long inital_gcs;
-	private static boolean log = true;
+	private static boolean log = false;
 
 	private Long start;
 	private Long end;
@@ -36,6 +36,7 @@ public class GCTracker {
 		}
 		start = getMemoryUse();
 		
+		System.out.println("Not checking for memory usage above 0");
 		// @todo waiting on a bug from sun to fix this issue
 		//TestCase.assertTrue("Total memory used sould always be above 0 ", start >= 0);
 	}
@@ -54,8 +55,9 @@ public class GCTracker {
 	    			", start " + start + "  in " + name);
 	    }
 		
-		// @todo waiting on a bug from sun to fix this issue
-		TestCase.assertTrue("Total memory used sould always be above 0 ", used >= 0);
+		// @todo waiting on a bug from sun to fix this issue 
+		// @todo if this is fixed please change constructor as well
+		//TestCase.assertTrue("Total memory used sould always be above 0 ", used >= 0);
 		
 		TestCase.assertTrue("The " + name + " should take up less than " +
 				threshold + " memeory and it took " + used + 
@@ -94,8 +96,9 @@ public class GCTracker {
 	 */
 	public static synchronized void forceGc() {
 		long total_gcs = getTotalGcs();
-		System.out.println("Got total gcs to " + total_gcs);
-		
+		if (log) {
+			System.out.println("Got total gcs to " + total_gcs);
+		}
 		if (inital_gcs == null) {
 			inital_gcs = total_gcs + 1;
 			if (log) {
@@ -110,6 +113,8 @@ public class GCTracker {
 			while (gcs < total_gcs) {
 				try {
 					Thread.sleep(20); 
+					//don't check log here, this will stall the program
+					// so the user (programmer) should know why its stalling
 					System.out.println("waiting for garbage collector to run for memory assertions " +
 							total_gcs);
 				} catch (Exception x) {
@@ -124,6 +129,8 @@ public class GCTracker {
 			while (gcs < total_gcs) {
 				try {
 					Thread.sleep(20); 
+					//don't check log here, this will stall the program
+					// so the user (programmer) should know why its stalling
 					System.out.println("waiting for garbage collector to run for memory assertions " +
 							total_gcs);
 				} catch (Exception x) {
