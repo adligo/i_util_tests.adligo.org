@@ -9,7 +9,8 @@ import org.adligo.i.util.client.I_Iterator;
 import junit.framework.TestCase;
 
 public class ArrayCollectionTests extends TestCase {
-
+	public static final String CONSTANT = "dosen't change";
+	
 	public void testAddRemoveAndClear() {
 		GCTracker memTracker = new GCTracker(ArrayCollectionTests.class,
 				"testAddRemoveAndClear");
@@ -62,19 +63,22 @@ public class ArrayCollectionTests extends TestCase {
 	}
 	
 	public void testMemoryRepeater() {
+		GCTracker memTracker = new GCTracker(ArrayCollectionTests.class,
+			"testMemoryRepeater");
 		for (int i = 0; i < 10000; i++) {
 			System.out.println("GCTracker iteration " + i + "\n\n\n\n");
 			testMemory();
 		}
+		memTracker.assertUse(200);
 	}
 	
 	public void testMemory() {
 		GCTracker memTracker = new GCTracker(ArrayCollectionTests.class,
 			"testMemory");
 		ArrayCollection collection = new ArrayCollection();
-		collection = null;
+		collection.add(CONSTANT);
 		//size of memTracker object...
-		memTracker.assertUse(200);
+		memTracker.assertUse(1000);
 		
 	}
 	
@@ -108,6 +112,26 @@ public class ArrayCollectionTests extends TestCase {
 				one == col.get(new TestString(p)));
 		assertTrue("The instances should Not match " + oneA + " ... " + col.get(oneA),
 				oneA != col.get(oneA));
+	}
+	
+	public void testGetInt() {
+		ArrayCollection col = new ArrayCollection();
+		for (int i = 0; i <= 1001; i++) {
+			col.add(i);
+		}
+		assertNull("Should match ",col.get(-1));
+		
+		assertEquals("Should match ", 0, col.get(0));
+		assertEquals("Should match ", 1, col.get(1));
+		assertEquals("Should match ", 98, col.get(98));
+		assertEquals("Should match ", 99, col.get(99));
+		assertEquals("Should match ", 100, col.get(100));
+		assertEquals("Should match ", 101, col.get(101));
+		assertEquals("Should match ", 102, col.get(102));
+		assertEquals("Should match ", 998, col.get(998));
+		assertEquals("Should match ", 999, col.get(999));
+		assertEquals("Should match ", 1000, col.get(1000));
+		assertEquals("Should match ", 1001, col.get(1001));
 	}
 
 
