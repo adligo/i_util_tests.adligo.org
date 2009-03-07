@@ -1,6 +1,5 @@
 package org.adligo.i.util.client;
 
-import java.util.ArrayList;
 
 import org.adligo.i.util.client.ArrayCollection;
 import org.adligo.i.util.client.I_Collection;
@@ -8,6 +7,13 @@ import org.adligo.i.util.client.I_Iterator;
 
 import junit.framework.TestCase;
 
+/**
+ * this tests the ArrayCollection and
+ * ArrayIterator classes
+ * 
+ * @author scott
+ *
+ */
 public class ArrayCollectionTests extends TestCase {
 	public static final String CONSTANT = "dosen't change";
 	

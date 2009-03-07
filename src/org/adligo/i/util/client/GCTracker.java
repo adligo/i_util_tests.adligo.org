@@ -28,7 +28,7 @@ public class GCTracker {
 	private Long end;
 	private String name = "";
 	
-	
+
 	public GCTracker(Class clazz, String p_test_name) {
 		name = clazz.getName() + ";" + p_test_name;
 		if (log) {

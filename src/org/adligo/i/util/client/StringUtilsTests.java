@@ -38,7 +38,24 @@ public class StringUtilsTests extends TestCase {
 		s = null;
 		
 		//class loading of StringUtils?
-		mem.assertUse(2000);
+		mem.assertUse(3000);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void testNoLineFeedParsing() {
+		GCTracker mem = new GCTracker(this.getClass(), "testUnixParsing");
+		
+		String fileContent = "foo=bar";
+		MapWrapper mw = new MapWrapper(new HashMap());
+		StringUtils.parse(fileContent, mw);
+		Map map = (Map) mw.getWrapped();
+		Set keys = map.keySet();
+		
+		assertTrue("Should contain foo", keys.contains("foo"));
+		assertEquals("Should contain value bar for key foo", 
+				"bar",map.get("foo"));
+		
+		mem.assertUse(3000);
 	}
 	
 	public void testUnixParsing() {
@@ -46,7 +63,7 @@ public class StringUtilsTests extends TestCase {
 		
 		String fileContent = "hey=hey_val\nhe=she\nyou=hime\n\n";
 		assertParsing(fileContent);
-		mem.assertUse(2000);
+		mem.assertUse(3000);
 	}
 	
 	public void testDosParsing() {
@@ -54,7 +71,7 @@ public class StringUtilsTests extends TestCase {
 		
 		String fileContent = "hey=hey_val\rhe=she\ryou=hime\r\r";
 		assertParsing(fileContent);
-		mem.assertUse(2000);
+		mem.assertUse(3000);
 	}
 
 	public void testMixedParsing() {
@@ -65,7 +82,7 @@ public class StringUtilsTests extends TestCase {
 		//switch
 		fileContent = "hey=hey_val\n\rhe=she\n\ryou=hime\n\r\n\r";
 		assertParsing(fileContent);
-		mem.assertUse(2000);
+		mem.assertUse(3000);
 	}
 	
 	private void assertParsing(String fileContent) {
