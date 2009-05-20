@@ -69,6 +69,10 @@ public class ArrayCollectionTests extends TestCase {
 	}
 	
 	public void testMemoryRepeater() {
+		/*
+		 * test takes to long and
+		 * leads to many false positives
+		 * so its commented out
 		GCTracker memTracker = new GCTracker(ArrayCollectionTests.class,
 			"testMemoryRepeater");
 		for (int i = 0; i < 10000; i++) {
@@ -76,6 +80,7 @@ public class ArrayCollectionTests extends TestCase {
 			testMemory();
 		}
 		memTracker.assertUse(200);
+		*/
 	}
 	
 	public void testMemory() {
@@ -122,9 +127,24 @@ public class ArrayCollectionTests extends TestCase {
 	
 	public void testGetInt() {
 		ArrayCollection col = new ArrayCollection();
+		assertContent(col);
+	}
+
+	public void testChunkSize5() {
+		ArrayCollection col = new ArrayCollection(5);
+		assertContent(col);
+	}
+	
+	public void testChunkSize10() {
+		ArrayCollection col = new ArrayCollection(10);
+		assertContent(col);
+	}
+	
+	private void assertContent(ArrayCollection col) {
 		for (int i = 0; i <= 1001; i++) {
 			col.add(i);
 		}
+		assertTrue(1002 == col.size());
 		assertNull("Should match ",col.get(-1));
 		
 		assertEquals("Should match ", 0, col.get(0));
