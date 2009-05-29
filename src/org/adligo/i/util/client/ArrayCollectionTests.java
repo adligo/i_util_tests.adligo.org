@@ -92,6 +92,21 @@ public class ArrayCollectionTests extends TestCase {
 		memTracker.assertUse(1000);
 		
 	}
+	public void testEquals() {
+		ArrayCollection a = new ArrayCollection();
+		ArrayCollection b = new ArrayCollection();
+		
+		a.add(1);
+		a.add(2);
+		a.add(3);
+		
+		b.add(1);
+		assertFalse(a.equals(b));
+		
+		b.add(2);
+		b.add(3);
+		assertEquals(a, b);
+	}
 	
 	public void testGet() {
 		ArrayCollection col = new ArrayCollection();
