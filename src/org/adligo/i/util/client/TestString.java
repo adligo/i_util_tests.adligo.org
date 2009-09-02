@@ -1,12 +1,14 @@
 package org.adligo.i.util.client;
 
+import junit.framework.TestCase;
+
 /**
  * this is a test class so that 
  * .equals is overridden but toString isn't
  * @author scott
  *
  */
-public class TestString {
+public class TestString extends TestCase {
 	private String string;
 	
 	public TestString(String p) {
@@ -39,5 +41,7 @@ public class TestString {
 		return true;
 	}
 	
-	
+	public void testNothing() {
+		// just so the tests pass
+	}
 }
