@@ -110,11 +110,11 @@ public class ArrayCollectionTests extends TestCase {
 	
 	public void testGet() {
 		ArrayCollection col = new ArrayCollection();
-		TestString one = new TestString("One");
-		TestString oneA = new TestString("One");
-		TestString two = new TestString("Two");
-		TestString twoA = new TestString("Two");
-		TestString three = new TestString("Three");
+		MockString one = new MockString("One");
+		MockString oneA = new MockString("One");
+		MockString two = new MockString("Two");
+		MockString twoA = new MockString("Two");
+		MockString three = new MockString("Three");
 		
 		System.out.println("One " + one + " Two " + two + " Three " + three + " OneA " + oneA);
 		
@@ -131,11 +131,11 @@ public class ArrayCollectionTests extends TestCase {
 		assertOnes(col, two, twoA, "Two");
 	}
 
-	private void assertOnes(ArrayCollection col, TestString one, TestString oneA, String p) {
+	private void assertOnes(ArrayCollection col, MockString one, MockString oneA, String p) {
 		assertEquals("The instances should match",
-				one, col.get(new TestString(p)));
+				one, col.get(new MockString(p)));
 		assertTrue("The instances should match",
-				one == col.get(new TestString(p)));
+				one == col.get(new MockString(p)));
 		assertTrue("The instances should Not match " + oneA + " ... " + col.get(oneA),
 				oneA != col.get(oneA));
 	}

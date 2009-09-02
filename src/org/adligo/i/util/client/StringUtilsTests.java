@@ -1,15 +1,12 @@
 package org.adligo.i.util.client;
 
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
 import java.util.Set;
 
-import org.adligo.i.util.client.StringUtils;
-import org.adligo.j2se.util.MapWrapper;
-
 import junit.framework.TestCase;
+
+import org.adligo.j2se.util.MapWrapper;
 
 public class StringUtilsTests extends TestCase {
 

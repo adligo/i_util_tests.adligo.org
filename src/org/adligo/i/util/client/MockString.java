@@ -8,10 +8,13 @@ import junit.framework.TestCase;
  * @author scott
  *
  */
-public class TestString extends TestCase {
+public class MockString {
 	private String string;
 	
-	public TestString(String p) {
+	public MockString() {	
+	}
+	
+	public MockString(String p) {
 		string = p;
 	}
 
@@ -32,16 +35,12 @@ public class TestString extends TestCase {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		TestString other = (TestString) obj;
+		MockString other = (MockString) obj;
 		if (string == null) {
 			if (other.string != null)
 				return false;
 		} else if (!string.equals(other.string))
 			return false;
 		return true;
-	}
-	
-	public void testNothing() {
-		// just so the tests pass
 	}
 }
