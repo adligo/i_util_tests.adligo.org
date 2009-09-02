@@ -17,18 +17,18 @@ public class EventTest extends TestCase {
 		
 		e.setValue("that");
 		assertEquals("To String should match", 
-				"Event [source=this,value=that,exception=null]", 
+				"Event [source=String-HASH-3559070,value=that,exception=null]", 
 				e.toString());
 		
 		e.setException(new Exception("throwable"));
 		assertEquals("To String should match", 
-				"Event [source=this,value=that,exception=java.lang.Exception: throwable]", 
+				"Event [source=String-HASH-3559070,value=that,exception=java.lang.Exception: throwable]", 
 				e.toString());
 	}
 
 	private void assertSource(Event e) {
 		assertEquals("To String should match", 
-				"Event [source=this,value=null,exception=null]", 
+				"Event [source=String-HASH-3559070,value=null,exception=null]", 
 				e.toString());
 	}
 }
