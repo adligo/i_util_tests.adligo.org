@@ -2,9 +2,9 @@ package org.adligo.i.util.client;
 
 import java.io.Serializable;
 
-import junit.framework.TestCase;
+import org.adligo.tests.ATest;
 
-public class ClassUtilsTest extends TestCase {
+public class ClassUtilsTest extends ATest {
 
 	public void testTypeOf() {
 		String s = new String();

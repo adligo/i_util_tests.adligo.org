@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.adligo.j2se.util.J2SEPlatform;
+import org.adligo.tests.ATest;
 
 import junit.framework.TestCase;
 
@@ -27,7 +28,7 @@ import junit.framework.TestCase;
  * @author scott
  *
  */
-public class FactoryTests extends TestCase implements I_Listener {
+public class FactoryTests extends ATest implements I_Listener {
 	I_Map lastProperties;
 	
 	public void setUp() throws Exception {

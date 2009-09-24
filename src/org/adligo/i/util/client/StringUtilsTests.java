@@ -4,11 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import junit.framework.TestCase;
-
 import org.adligo.j2se.util.MapWrapper;
+import org.adligo.tests.ATest;
 
-public class StringUtilsTests extends TestCase {
+public class StringUtilsTests extends ATest {
 
 	public void testEqualsIgnoreCase() {
 		String a = "a";

@@ -1,11 +1,9 @@
 package org.adligo.i.util.client;
 
 
-import org.adligo.i.util.client.ArrayCollection;
-import org.adligo.i.util.client.I_Collection;
-import org.adligo.i.util.client.I_Iterator;
-
-import junit.framework.TestCase;
+import org.adligo.i.log.client.Log;
+import org.adligo.i.log.client.LogFactory;
+import org.adligo.tests.ATest;
 
 /**
  * this tests the ArrayCollection and
@@ -14,10 +12,14 @@ import junit.framework.TestCase;
  * @author scott
  *
  */
-public class ArrayCollectionTests extends TestCase {
+public class ArrayCollectionTests extends ATest {
+	private static final Log log = LogFactory.getLog(ArrayCollectionTests.class);
 	public static final String CONSTANT = "dosen't change";
 	
 	public void testAddRemoveAndClear() {
+		if (log.isDebugEnabled()) {
+			log.debug("starting testAddRemoveAndClear");
+		}
 		GCTracker memTracker = new GCTracker(ArrayCollectionTests.class,
 				"testAddRemoveAndClear");
 		
@@ -84,6 +86,10 @@ public class ArrayCollectionTests extends TestCase {
 	}
 	
 	public void testMemory() {
+		if (log.isDebugEnabled()) {
+			log.debug("starting testMemory");
+		}
+		
 		GCTracker memTracker = new GCTracker(ArrayCollectionTests.class,
 			"testMemory");
 		ArrayCollection collection = new ArrayCollection();
@@ -93,6 +99,9 @@ public class ArrayCollectionTests extends TestCase {
 		
 	}
 	public void testEquals() {
+		if (log.isDebugEnabled()) {
+			log.debug("starting testEquals");
+		}
 		ArrayCollection a = new ArrayCollection();
 		ArrayCollection b = new ArrayCollection();
 		
@@ -109,6 +118,9 @@ public class ArrayCollectionTests extends TestCase {
 	}
 	
 	public void testGet() {
+		if (log.isDebugEnabled()) {
+			log.debug("starting testGet");
+		}
 		ArrayCollection col = new ArrayCollection();
 		MockString one = new MockString("One");
 		MockString oneA = new MockString("One");
@@ -141,16 +153,25 @@ public class ArrayCollectionTests extends TestCase {
 	}
 	
 	public void testGetInt() {
+		if (log.isDebugEnabled()) {
+			log.debug("starting testGetInt");
+		}
 		ArrayCollection col = new ArrayCollection();
 		assertContent(col);
 	}
 
 	public void testChunkSize5() {
+		if (log.isDebugEnabled()) {
+			log.debug("starting testChunkSize5");
+		}
 		ArrayCollection col = new ArrayCollection(5);
 		assertContent(col);
 	}
 	
 	public void testChunkSize10() {
+		if (log.isDebugEnabled()) {
+			log.debug("starting testChunkSize10");
+		}
 		ArrayCollection col = new ArrayCollection(10);
 		assertContent(col);
 	}

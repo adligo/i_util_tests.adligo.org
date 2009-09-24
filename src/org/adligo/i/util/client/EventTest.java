@@ -1,8 +1,8 @@
 package org.adligo.i.util.client;
 
-import junit.framework.TestCase;
+import org.adligo.tests.ATest;
 
-public class EventTest extends TestCase {
+public class EventTest extends ATest {
 
 	public void testEvent() {
 		Event e = new Event();

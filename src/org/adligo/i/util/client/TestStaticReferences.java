@@ -2,8 +2,8 @@ package org.adligo.i.util.client;
  
 import java.util.ArrayList;
 import java.util.List;
- 
-import junit.framework.TestCase;
+
+import org.adligo.tests.ATest;
  
 /**
  * yep this class basically just tests java it self
@@ -20,11 +20,10 @@ import junit.framework.TestCase;
  * @author scott
  *
  */
-public class TestStaticReferences extends TestCase implements I_Listener {
+public class TestStaticReferences extends ATest implements I_Listener {
 	public static final String CONSTANT = "doesn't change";
 	public static final Exception CONSTANT_EXCEPTION = new Exception("test exception");
 	
-	@SuppressWarnings("static-access")
 	public void testStaticReferences() {
 		/*
 		 * test takes to long and
@@ -45,6 +44,7 @@ public class TestStaticReferences extends TestCase implements I_Listener {
 		*/
 	}
  
+	@SuppressWarnings("unused")
 	private void create() {
 		createObject();
 		createList();
@@ -54,12 +54,15 @@ public class TestStaticReferences extends TestCase implements I_Listener {
 	}
 	
 	private void createObject() {
+		@SuppressWarnings("unused")
 		Object o = new Object() {
+			@SuppressWarnings("unused")
 			private String foo = CONSTANT;
 			
 		};
 	}
 	
+	@SuppressWarnings("unchecked")
 	private void createList() {
 		List list = new ArrayList();
 		list.add(CONSTANT);
