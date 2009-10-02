@@ -26,7 +26,7 @@ public class EventTest extends ATest {
 				e.toString());
 	}
 
-	private void assertSource(Event e) {
+	private void assertSource(I_Event e) {
 		assertEquals("To String should match", 
 				"Event [source= instanceofString-HASH-3559070,value=null,exception=null]", 
 				e.toString());

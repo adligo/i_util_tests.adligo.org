@@ -86,7 +86,7 @@ public class TestStaticReferences extends ATest implements I_Listener {
 		e.setListener(this);
 	}
 	
-	public void onEvent(Event p) {
+	public void onEvent(I_Event p) {
 		//do nothing just for convience
 	}
 }

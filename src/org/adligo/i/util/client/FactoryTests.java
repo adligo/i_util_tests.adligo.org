@@ -120,7 +120,7 @@ public class FactoryTests extends ATest implements I_Listener {
 	}
 	
 	@Override
-	public void onEvent(Event p) {
+	public void onEvent(I_Event p) {
 		lastProperties = (I_Map) p.getValue();
 	}
 }
