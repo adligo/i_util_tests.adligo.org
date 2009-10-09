@@ -29,12 +29,28 @@ public class ClassUtilsTest extends ATest {
 	
 	}
 		
+	
+	public void testClassShortName() {
+		String shortName = ClassUtils.getClassShortName(this.getClass());
+		assertEquals("ClassUtilsTest", shortName);
+		
+	}
 }
 
 class MockClass implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 }
 
 class MockClass2 extends MockClass {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 }
