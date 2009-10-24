@@ -102,4 +102,10 @@ public class StringUtilsTests extends ATest {
 		map = null;
 		keys = null;
 	}
+	
+	public void testLastIndexOf() {
+		String domain = "zeuhl.adligo.com";
+		int index = StringUtils.lastIndexOf(domain, '.');
+		assertEquals(12, index);
+	}
 }
