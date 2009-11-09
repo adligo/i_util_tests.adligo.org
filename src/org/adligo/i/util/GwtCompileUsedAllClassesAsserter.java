@@ -151,4 +151,8 @@ public class GwtCompileUsedAllClassesAsserter extends ATest implements I_UsageHo
 	public void addUsed(Class<?> clazz) {
 		usedClasses.add(clazz);
 	}
+
+	public Set<Class<?>> getUsedClasses() {
+		return usedClasses;
+	}
 }
