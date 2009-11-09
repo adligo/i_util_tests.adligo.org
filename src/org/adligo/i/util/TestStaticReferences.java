@@ -1,8 +1,12 @@
-package org.adligo.i.util.client;
+package org.adligo.i.util;
  
 import java.util.ArrayList;
 import java.util.List;
 
+import org.adligo.i.util.client.Event;
+import org.adligo.i.util.client.I_Event;
+import org.adligo.i.util.client.I_Listener;
+import org.adligo.i.util.client.ListenerValueObject;
 import org.adligo.tests.ATest;
  
 /**

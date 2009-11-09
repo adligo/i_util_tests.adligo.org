@@ -1,4 +1,4 @@
-package org.adligo.i.util.client;
+package org.adligo.i.util;
 
 import java.lang.management.ManagementFactory;
 import java.lang.management.GarbageCollectorMXBean;

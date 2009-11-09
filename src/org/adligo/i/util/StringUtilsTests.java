@@ -1,9 +1,10 @@
-package org.adligo.i.util.client;
+package org.adligo.i.util;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import org.adligo.i.util.client.StringUtils;
 import org.adligo.j2se.util.MapWrapper;
 import org.adligo.tests.ATest;
 

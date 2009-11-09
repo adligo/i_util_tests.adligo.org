@@ -1,5 +1,7 @@
-package org.adligo.i.util.client;
+package org.adligo.i.util;
 
+import org.adligo.i.util.client.Event;
+import org.adligo.i.util.client.I_Event;
 import org.adligo.tests.ATest;
 
 public class EventTest extends ATest {

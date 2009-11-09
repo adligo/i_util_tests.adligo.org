@@ -1,8 +1,11 @@
-package org.adligo.i.util.client;
+package org.adligo.i.util;
 
 
 import org.adligo.i.log.client.Log;
 import org.adligo.i.log.client.LogFactory;
+import org.adligo.i.util.client.ArrayCollection;
+import org.adligo.i.util.client.I_Collection;
+import org.adligo.i.util.client.I_Iterator;
 import org.adligo.tests.ATest;
 
 /**

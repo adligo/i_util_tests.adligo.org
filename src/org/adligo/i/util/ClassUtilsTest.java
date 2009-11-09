@@ -1,7 +1,9 @@
-package org.adligo.i.util.client;
+package org.adligo.i.util;
 
 import java.io.Serializable;
 
+import org.adligo.i.util.client.ClassUtils;
+import org.adligo.i.util.client.I_Collection;
 import org.adligo.tests.ATest;
 
 public class ClassUtilsTest extends ATest {
@@ -33,6 +35,12 @@ public class ClassUtilsTest extends ATest {
 	public void testClassShortName() {
 		String shortName = ClassUtils.getClassShortName(this.getClass());
 		assertEquals("ClassUtilsTest", shortName);
+		
+	}
+	
+	public void testGetClassName() {
+		assertEquals("org.adligo.i.util.ClassUtilsTest", ClassUtils.getClassName(ClassUtilsTest.class));
+		assertEquals("org.adligo.i.util.client.I_Collection", ClassUtils.getClassName(I_Collection.class));
 		
 	}
 }

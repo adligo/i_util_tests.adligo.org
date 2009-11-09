@@ -1,4 +1,4 @@
-package org.adligo.i.util.client;
+package org.adligo.i.util;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -6,6 +6,16 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import org.adligo.i.util.client.CollectionFactory;
+import org.adligo.i.util.client.I_Collection;
+import org.adligo.i.util.client.I_Event;
+import org.adligo.i.util.client.I_ImmutableMap;
+import org.adligo.i.util.client.I_Iterator;
+import org.adligo.i.util.client.I_Listener;
+import org.adligo.i.util.client.I_Map;
+import org.adligo.i.util.client.IteratorFactory;
+import org.adligo.i.util.client.MapFactory;
+import org.adligo.i.util.client.PropertyFactory;
 import org.adligo.j2se.util.J2SEPlatform;
 import org.adligo.tests.ATest;
 

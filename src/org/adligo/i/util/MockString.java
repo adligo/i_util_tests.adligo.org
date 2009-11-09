@@ -1,4 +1,4 @@
-package org.adligo.i.util.client;
+package org.adligo.i.util;
 
 import junit.framework.TestCase;
 
