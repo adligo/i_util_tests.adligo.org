@@ -44,6 +44,10 @@ public class GwtCompileUsedAllClassesAsserter implements I_UsageHolder {
             if ("jar".equals(resource.getProtocol())) {
             	//file:/
             	String jarName = fileName.substring(6, fileName.indexOf("!"));
+            	if (!jarName.contains(":")) {
+            		//absolute path fix for unix?
+            		jarName = "/" + jarName;
+            	}
             	if (log.isDebugEnabled()) {
                 	log.debug("jarName is " + jarName);
                 }
@@ -77,12 +81,7 @@ public class GwtCompileUsedAllClassesAsserter implements I_UsageHolder {
 	        List<Class<?>> classes = new ArrayList<Class<?>>();
 	        
 	        String dirName = directory.getAbsolutePath();
-	      
-	        if (!dirName.contains(":")) {
-	        	//absolute path fix for unix?
-	        	directory = new File("/" + dirName);
-	        	dirName = directory.getAbsolutePath();
-	        }
+
 	        if (log.isDebugEnabled()) {
         		log.debug("checking " + dirName);
         	}
