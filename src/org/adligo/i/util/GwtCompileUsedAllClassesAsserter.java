@@ -80,6 +80,10 @@ public class GwtCompileUsedAllClassesAsserter implements I_UsageHolder {
 	        if (log.isDebugEnabled()) {
         		log.debug("checking " + dirName);
         	}
+	        if (!dirName.contains(":")) {
+	        	//absolute path fix for unix?
+	        	directory = new File("/" + dirName);
+	        }
 	        
 	        if (!directory.exists()) {
 	        	if (log.isDebugEnabled()) {
