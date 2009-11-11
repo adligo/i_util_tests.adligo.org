@@ -77,13 +77,15 @@ public class GwtCompileUsedAllClassesAsserter implements I_UsageHolder {
 	        List<Class<?>> classes = new ArrayList<Class<?>>();
 	        
 	        String dirName = directory.getAbsolutePath();
-	        if (log.isDebugEnabled()) {
-        		log.debug("checking " + dirName);
-        	}
+	      
 	        if (!dirName.contains(":")) {
 	        	//absolute path fix for unix?
 	        	directory = new File("/" + dirName);
+	        	dirName = directory.getAbsolutePath();
 	        }
+	        if (log.isDebugEnabled()) {
+        		log.debug("checking " + dirName);
+        	}
 	        
 	        if (!directory.exists()) {
 	        	if (log.isDebugEnabled()) {
