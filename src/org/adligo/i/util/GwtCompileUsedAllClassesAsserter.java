@@ -14,7 +14,26 @@ import org.adligo.i.log.client.LogFactory;
 import org.adligo.i.util.client.ClassUsageView;
 import org.adligo.i.util.client.ClassUtils;
 import org.adligo.i.util.client.I_UsageHolder;
+import org.adligo.i.util.client.MockCollection;
+import org.adligo.i.util.client.MockDisposable;
+import org.adligo.i.util.client.MockEvent;
+import org.adligo.i.util.client.MockFactory;
+import org.adligo.i.util.client.MockImmutableMap;
+import org.adligo.i.util.client.MockIterator;
+import org.adligo.i.util.client.MockListener;
+import org.adligo.i.util.client.MockMap;
+import org.adligo.i.util.client.MockTextFormatter;
+import org.adligo.i.util.client.MockThreadContainer;
+import org.adligo.i.util.client.MockThreadPopulator;
+import org.adligo.i.util.client.MockWrapper;
 import org.adligo.i.util.client.UtilEntryPoint;
+import org.adligo.i.util.client.models.ComplexCollections;
+import org.adligo.i.util.client.models.SimpleCollections;
+import org.adligo.i.util.client.models.SimpleFailureModel;
+import org.adligo.i.util.client.models.SimpleSerializable;
+import org.adligo.i.util.client.models.SimpleStaticFieldModel;
+import org.adligo.i.util.client.models.other_pkg.SimpleIsSerializable;
+import org.adligo.i.util.client.models.other_pkg.SimpleMaps;
 import org.adligo.tests.ATest;
 
 
@@ -97,6 +116,29 @@ public class GwtCompileUsedAllClassesAsserter extends ATest implements I_UsageHo
 		ignore.add(ClassUtils.getClassName(ClassUsageView.class));
 		ignore.add(ClassUtils.getClassName(I_UsageHolder.class));
 		ignore.add(utilEntryPointClassName);
+		
+		ignore.add(ClassUtils.getClassName(ComplexCollections.class));
+		ignore.add(ClassUtils.getClassName(SimpleCollections.class));
+		ignore.add(ClassUtils.getClassName(SimpleFailureModel.class));
+		ignore.add(ClassUtils.getClassName(SimpleSerializable.class));
+		ignore.add(ClassUtils.getClassName(SimpleStaticFieldModel.class));
+		
+		ignore.add(ClassUtils.getClassName(SimpleIsSerializable.class));
+		ignore.add(ClassUtils.getClassName(SimpleMaps.class));
+		
+		ignore.add(ClassUtils.getClassName(MockCollection.class));
+		ignore.add(ClassUtils.getClassName(MockDisposable.class));
+		ignore.add(ClassUtils.getClassName(MockEvent.class));
+		ignore.add(ClassUtils.getClassName(MockFactory.class));
+		ignore.add(ClassUtils.getClassName(MockImmutableMap.class));
+		ignore.add(ClassUtils.getClassName(MockIterator.class));
+		ignore.add(ClassUtils.getClassName(MockListener.class));
+		ignore.add(ClassUtils.getClassName(MockMap.class));
+		ignore.add(ClassUtils.getClassName(MockTextFormatter.class));
+		ignore.add(ClassUtils.getClassName(MockThreadContainer.class));
+		ignore.add(ClassUtils.getClassName(MockThreadPopulator.class));
+		ignore.add(ClassUtils.getClassName(MockWrapper.class));
+																										
 		
 		for (int i = 0; i <= 12; i++) {
 			ignore.add(utilEntryPointClassName + "$" + i);

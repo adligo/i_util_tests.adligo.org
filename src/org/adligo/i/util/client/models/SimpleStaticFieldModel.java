@@ -1,4 +1,4 @@
-package org.adligo.i.util.test_models;
+package org.adligo.i.util.client.models;
 
 import java.io.Serializable;
 

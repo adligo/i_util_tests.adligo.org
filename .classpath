@@ -9,5 +9,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/tests"/>
 	<classpathentry kind="var" path="GWT_HOME/gwt-user.jar"/>
 	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER/GWT (3)"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/adi"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import org.adligo.i.log.client.Log;
+import org.adligo.i.log.client.LogFactory;
 import org.adligo.i.util.client.CollectionFactory;
 import org.adligo.i.util.client.I_Collection;
 import org.adligo.i.util.client.I_Event;
@@ -16,6 +18,7 @@ import org.adligo.i.util.client.I_Map;
 import org.adligo.i.util.client.IteratorFactory;
 import org.adligo.i.util.client.MapFactory;
 import org.adligo.i.util.client.PropertyFactory;
+import org.adligo.i.util.client.PropertyFileReadException;
 import org.adligo.j2se.util.J2SEPlatform;
 import org.adligo.tests.ATest;
 
@@ -39,27 +42,70 @@ import junit.framework.TestCase;
  *
  */
 public class FactoryTests extends ATest implements I_Listener {
+	private static final Log log = LogFactory.getLog(FactoryTests.class);
+	
+	PropertyFileReadException lastReadException;
 	I_Map lastProperties;
 	
 	public void setUp() throws Exception {
 		J2SEPlatform.init();
 	}
 	
+	/**
+	 * note I have found this test to fail sometimes in eclipse
+	 * you may need to add the src folder to your JUnit classpath
+	 * under the Classpath tab, user entries tree node
+	 */
 	@SuppressWarnings("unchecked")
 	public void testPropertyFactory() {
+		lastReadException = null;
+		lastProperties = null;
 		PropertyFactory.get("/foo.properties", this);
+		assertNull(lastReadException);
 		assertNotNull("j2SE util should perform" +
-				"a sync fetch of the foo.properties" +
-				"file and call back this class",
+				" a sync fetch of the foo.properties" +
+				" file and call back this class",
 				lastProperties);
 		
 		Map props = (Map) lastProperties.getWrapped();
-		System.out.println(" props " + props);
+		if (log.isDebugEnabled()) {
+			log.debug(" props " + props);
+		}
 		Set keys = props.keySet();
 		assertTrue("keys should contain foo ", keys.contains("foo"));
 		assertEquals("last properties should have foo=bar",
 				"bar", lastProperties.get("foo"));
+	
+		lastReadException = null;
+		lastProperties = null;
+		PropertyFactory.get("/bar.properties", this);
+		assertNull(lastReadException);
+		assertNotNull("j2SE util should perform" +
+				" a sync fetch of the foo.properties" +
+				" file and call back this class",
+				lastProperties);
+		
+		props = (Map) lastProperties.getWrapped();
+		if (log.isDebugEnabled()) {
+			log.debug(" props " + props);
+		}
+		keys = props.keySet();
+		assertTrue("keys should contain 1 ", keys.contains("1"));
+		assertEquals("last properties should have 1=2",
+				"2", lastProperties.get("1"));
+		assertTrue("keys should contain 3 ", keys.contains("3"));
+		assertEquals("last properties should have 3=4",
+				"4", lastProperties.get("3"));
+		
+		
+		lastReadException = null;
+		lastProperties = null;
+		PropertyFactory.get("/not_there.properties", this);
+		assertNotNull("There should be a exception for reading file not_there.properties", 
+				lastReadException);
+		assertNull(lastProperties);
 	}
+	
 	
 	
 	@SuppressWarnings("unchecked")
@@ -131,6 +177,10 @@ public class FactoryTests extends ATest implements I_Listener {
 	
 	@Override
 	public void onEvent(I_Event p) {
-		lastProperties = (I_Map) p.getValue();
+		if (p.getValue() instanceof PropertyFileReadException) {
+			lastReadException = (PropertyFileReadException) p.getValue();
+		} else {
+			lastProperties = (I_Map) p.getValue();
+		}
 	}
 }

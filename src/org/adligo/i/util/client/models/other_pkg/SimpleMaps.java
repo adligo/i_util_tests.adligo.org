@@ -1,4 +1,4 @@
-package org.adligo.i.util.test_models.other_pkg;
+package org.adligo.i.util.client.models.other_pkg;
 
 import java.io.Serializable;
 import java.sql.Date;

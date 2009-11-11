@@ -7,13 +7,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.adligo.i.util.test_models.ComplexCollections;
-import org.adligo.i.util.test_models.SimpleCollections;
-import org.adligo.i.util.test_models.SimpleFailureModel;
-import org.adligo.i.util.test_models.SimpleSerializable;
-import org.adligo.i.util.test_models.SimpleStaticFieldModel;
-import org.adligo.i.util.test_models.other_pkg.SimpleIsSerializable;
-import org.adligo.i.util.test_models.other_pkg.SimpleMaps;
+import org.adligo.i.util.client.models.ComplexCollections;
+import org.adligo.i.util.client.models.SimpleCollections;
+import org.adligo.i.util.client.models.SimpleFailureModel;
+import org.adligo.i.util.client.models.SimpleSerializable;
+import org.adligo.i.util.client.models.SimpleStaticFieldModel;
+import org.adligo.i.util.client.models.other_pkg.SimpleIsSerializable;
+import org.adligo.i.util.client.models.other_pkg.SimpleMaps;
 import org.adligo.tests.ATest;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
@@ -65,7 +65,7 @@ public class IsGwtRpcSerializableTests extends ATest {
 			ex = x;
 		}
 		assertNotNull(ex);
-		assertEquals("class class org.adligo.i.util.test_models.SimpleFailureModel" +
+		assertEquals("class class org.adligo.i.util.client.models.SimpleFailureModel" +
 				" with parents [] is not serlizeable see log. ", ex.getMessage());
 	}
 	

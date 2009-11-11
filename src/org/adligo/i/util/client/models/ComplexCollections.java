@@ -1,11 +1,11 @@
-package org.adligo.i.util.test_models;
+package org.adligo.i.util.client.models;
 
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.Collection;
 import java.util.Map;
 
-import org.adligo.i.util.test_models.other_pkg.SimpleIsSerializable;
+import org.adligo.i.util.client.models.other_pkg.SimpleIsSerializable;
 
 public class ComplexCollections implements Serializable {
 	/**
