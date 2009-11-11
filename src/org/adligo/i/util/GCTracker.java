@@ -29,7 +29,7 @@ public class GCTracker {
 	private String name = "";
 	
 
-	public GCTracker(Class clazz, String p_test_name) {
+	public GCTracker(Class<?> clazz, String p_test_name) {
 		name = clazz.getName() + ";" + p_test_name;
 		if (log) {
 			System.out.println("start " + name);
@@ -72,7 +72,7 @@ public class GCTracker {
 	}
 	
 	public long getMemoryUse(){
-		forceGc();
+		//forceGc();
 		
 		long totalMemory = Runtime.getRuntime().totalMemory();
 	    
@@ -96,7 +96,7 @@ public class GCTracker {
 	 * what i mean to say is no special garbage collection arguments
 	 * 
 	 */
-	public static synchronized void forceGc() {
+	public static synchronized void forceGcK() {
 		long total_gcs = getTotalGcs();
 		if (log) {
 			System.out.println("Got total gcs to " + total_gcs);

@@ -1,8 +1,8 @@
 package org.adligo.i.util.client.models;
 
 import java.io.Serializable;
-import java.sql.Date;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Map;
 
 import org.adligo.i.util.client.models.other_pkg.SimpleIsSerializable;

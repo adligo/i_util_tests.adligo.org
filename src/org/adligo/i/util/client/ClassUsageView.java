@@ -6,6 +6,7 @@ import java.util.Set;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Widget;
 
 public class ClassUsageView extends Composite implements I_UsageHolder {
 	private VerticalPanel verticalPanel;
@@ -29,5 +30,12 @@ public class ClassUsageView extends Composite implements I_UsageHolder {
 
 	public Set<Class<?>> getClasses() {
 		return classes;
+	}
+	
+	public void addResult(String result) {
+		verticalPanel.add(new Label(result));
+	}
+	public void addWidget(Widget item) {
+		verticalPanel.add(item);
 	}
 }

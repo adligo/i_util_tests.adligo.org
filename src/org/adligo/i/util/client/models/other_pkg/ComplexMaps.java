@@ -1,23 +1,29 @@
 package org.adligo.i.util.client.models.other_pkg;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.Collection;
 import java.util.Map;
 
-import com.google.gwt.user.client.rpc.IsSerializable;
+import org.adligo.i.util.client.models.SimpleSerializable;
 
-public class SimpleMaps implements IsSerializable {
+public class ComplexMaps implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/**
 	 * note the funny formatting!
 	 * its part of the test!
 	 */
-	private Map<String,Serializable> strings;
-	private Map<String,Date>
+	private Map<String,SimpleIsSerializable> strings;
+	private Map<String,SimpleSerializable>
 	dates;
 	
-	private Map<String,	Character> char_objs;
+	private Map<String,	Map	<
+		SimpleIsSerializable, SimpleSerializable >> char_objs;
 	
-	private Map<String,		Byte> byte_objs;
+	private Map<String,		Collection<	SimpleIsSerializable >	> byte_objs;
 	private Map<String,
 		Short> short_objs ;
 	private Map<	String,Integer> int_objs;
@@ -25,22 +31,16 @@ public class SimpleMaps implements IsSerializable {
 	private Map<
 		String,	Float > float_objs
 	;
-	
-	private Map<Integer,Double	> double_objs;
-	private Map<
-		Integer,
-		Long
-		> longs;
-	public Map<String, Serializable> getStrings() {
+	public Map<String, SimpleIsSerializable> getStrings() {
 		return strings;
 	}
-	public Map<String, Date> getDates() {
+	public Map<String, SimpleSerializable> getDates() {
 		return dates;
 	}
-	public Map<String, Character> getChar_objs() {
+	public Map<String, Map<SimpleIsSerializable, SimpleSerializable>> getChar_objs() {
 		return char_objs;
 	}
-	public Map<String, Byte> getByte_objs() {
+	public Map<String, Collection<SimpleIsSerializable>> getByte_objs() {
 		return byte_objs;
 	}
 	public Map<String, Short> getShort_objs() {
@@ -55,22 +55,17 @@ public class SimpleMaps implements IsSerializable {
 	public Map<String, Float> getFloat_objs() {
 		return float_objs;
 	}
-	public Map<Integer, Double> getDouble_objs() {
-		return double_objs;
-	}
-	public Map<Integer, Long> getLongs() {
-		return longs;
-	}
-	public void setStrings(Map<String, Serializable> strings) {
+	public void setStrings(Map<String, SimpleIsSerializable> strings) {
 		this.strings = strings;
 	}
-	public void setDates(Map<String, Date> dates) {
+	public void setDates(Map<String, SimpleSerializable> dates) {
 		this.dates = dates;
 	}
-	public void setChar_objs(Map<String, Character> charObjs) {
+	public void setChar_objs(
+			Map<String, Map<SimpleIsSerializable, SimpleSerializable>> charObjs) {
 		char_objs = charObjs;
 	}
-	public void setByte_objs(Map<String, Byte> byteObjs) {
+	public void setByte_objs(Map<String, Collection<SimpleIsSerializable>> byteObjs) {
 		byte_objs = byteObjs;
 	}
 	public void setShort_objs(Map<String, Short> shortObjs) {
@@ -84,11 +79,5 @@ public class SimpleMaps implements IsSerializable {
 	}
 	public void setFloat_objs(Map<String, Float> floatObjs) {
 		float_objs = floatObjs;
-	}
-	public void setDouble_objs(Map<Integer, Double> doubleObjs) {
-		double_objs = doubleObjs;
-	}
-	public void setLongs(Map<Integer, Long> longs) {
-		this.longs = longs;
 	}
 }

@@ -4,3 +4,4 @@ test_reports
 gwt_test_reports
 .gwt
 test_failure.properties
+gwt_test_output

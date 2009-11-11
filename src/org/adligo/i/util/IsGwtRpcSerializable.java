@@ -1,5 +1,6 @@
 package org.adligo.i.util;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.lang.reflect.Constructor;
@@ -25,6 +26,7 @@ public class IsGwtRpcSerializable  {
 	private static final Log log = LogFactory.getLog(IsGwtRpcSerializable.class);
 	private static Set<Character> WHITE_SPACE_CHARACTERS = getWhiteSpaceChars();
 	private static Map<String,Class<?>> COMMON_CLASSES = getCommonClasses();
+	private static Set<Class<?>> SPECIAL_COMMON_CLASSES = getSpecialCommonClasses();
 	
 	private static Set<Character> getWhiteSpaceChars() {
 		Set<Character> toRet = new HashSet<Character>();
@@ -35,12 +37,22 @@ public class IsGwtRpcSerializable  {
 		return toRet;
 	}
 	
+	private static Set<Class<?>> getSpecialCommonClasses() {
+		Set<Class<?>> toRet = new HashSet<Class<?>>();
+		toRet.add(java.util.Date.class);
+		return toRet;
+	}
+	
+	/**
+	 * note Date is not in here so that java.util.Date and java.sql.Date 
+	 * can be idenitified all the time
+	 * @return
+	 */
 	private static Map<String,Class<?>>  getCommonClasses() {
 		Map<String,Class<?>> toRet = new HashMap<String,Class<?>>();
 		toRet.put("String",String.class);
 		toRet.put("Serializable", Serializable.class);
 		toRet.put("IsSerializable", IsSerializable.class);
-		toRet.put("Date",Date.class);
 		toRet.put("Short",Short.class);
 		toRet.put("Integer",Integer.class);
 		toRet.put("Long",Long.class);
@@ -58,6 +70,17 @@ public class IsGwtRpcSerializable  {
 	 * your source code must be on the class path for generics
 	 * and you must use generics for Collection fields
 	 * 
+	 * also note you must explicitly import other GWT RPC Serializable 
+	 * classes in your imports ie
+	 * 
+	 * import foo.bar.MyClass;
+	 * NOT
+	 * import foo.bar.*;
+	 * 
+	 * I could probably get .* to work, but I think its a good convention 
+	 * to have explicit imports, so I wouln't do it.  Classes in the same
+	 * package will get found.
+	 * 
 	 * @param clazz
 	 */
 	public static void isRpcSerializable(Class<?> clazz) throws SerializationException {
@@ -70,6 +93,15 @@ public class IsGwtRpcSerializable  {
 		if (commonClasses.contains(clazz)) {
 			if (log.isDebugEnabled()) {
 				log.debug(clazz + " is a A common class which is ok. ");
+			}
+			return;
+		}
+		if (java.sql.Date.class.isAssignableFrom(clazz)) {
+			throw new SerializationException("You can't have a java.sql.Date you need java.util.Date.");
+		}
+		if (SPECIAL_COMMON_CLASSES.contains(clazz)) {
+			if (log.isDebugEnabled()) {
+				log.debug(clazz + " is a A special common class which is ok. ");
 			}
 			return;
 		}
@@ -124,6 +156,12 @@ public class IsGwtRpcSerializable  {
 	private static void isRpcSerializable( IsGwtRpcBuilder builder) throws SerializationException {
 			Class<?> clazz = builder.getCurrentClass();
 			
+			if (SPECIAL_COMMON_CLASSES.contains(clazz)) {
+				if (log.isDebugEnabled()) {
+					log.debug(clazz + " is a A special common class which is ok. ");
+				}
+				return;
+			}
 			if (builder.isCheckingGeneric()) {
 				if (log.isDebugEnabled()) {
 					log.debug(" checking generic ");
@@ -140,6 +178,11 @@ public class IsGwtRpcSerializable  {
 				return;
 			}
 			
+			if (java.sql.Date.class == clazz) {
+				throw new SerializationException("You can't have a java.sql.Date you need java.util.Date "
+						+ " in class " + builder.getCurrentClass() + 
+						" with parents " + builder.getCurrentClassParents());
+			}
 			List<Class<?>> parents = builder.getCurrentClassParents();
 			
 			LegacySerializationPolicy plcy = LegacySerializationPolicy.getInstance();
@@ -163,10 +206,11 @@ public class IsGwtRpcSerializable  {
 				assertFields(builder);
 				assertConstructors(clazz, parents);
 			} else {
+				
+				if (isCollection(builder)) {
+					return;
+				}
 				try {
-					if (isCollection(builder)) {
-						return;
-					}
 					plcy.validateSerialize(clazz);
 					if (log.isDebugEnabled()) {
 							log.debug("class " + clazz + " with parents " + parents +
@@ -183,7 +227,7 @@ public class IsGwtRpcSerializable  {
 		
 	}
 
-	private static boolean isCollection(IsGwtRpcBuilder builder) {
+	private static boolean isCollection(IsGwtRpcBuilder builder) throws SerializationException {
 		
 		Class<?> clazz = builder.getCurrentClass();
 		String fieldName = builder.getCurrentField();
@@ -208,7 +252,7 @@ public class IsGwtRpcSerializable  {
 	}
 
 	private static boolean parseJavaFileForCollection(IsGwtRpcBuilder builder,
-			List<Class<?>> parents) {
+			List<Class<?>> parents) throws SerializationException {
 		Class<?> parent = parents.get(0);
 		String classJavaFileName = ClassUtils.getClassShortName(parent) + ".java";
 		
@@ -241,10 +285,17 @@ public class IsGwtRpcSerializable  {
 			builder.setCurrentClassJavaFileName(currentJavaFile);
 			builder.setCurrentClassMemberContent(currentMemberContent);
 			
-		} catch (Exception x) {
-			RuntimeException toThrow = new RuntimeException("problem parsing file " + classJavaFileName +
+		} catch (IOException x) {
+			SerializationException toThrow = new SerializationException("problem reading file " + classJavaFileName +
 					" you may need to add the source folder to your classpath of your test run.");
 			toThrow.initCause(x);
+			throw toThrow;
+		} catch (JavaFileReadException j) {
+			SerializationException toThrow = new SerializationException("problem parsing file " + classJavaFileName +
+			" you may need to alter your java source code to be compatible with this test. " +
+			" Add explicit imports (ie import foo.bar.YourClass;) and possibly submit a bug report " +
+			" for the IsGwtRpcSerializable class, support@adligo.com. ");
+			toThrow.initCause(j);
 			throw toThrow;
 		}
 		return true;
@@ -259,7 +310,7 @@ public class IsGwtRpcSerializable  {
 	 * @throws Exception
 	 */
 	private static void checkFileContentForFieldGenerics(IsGwtRpcBuilder builder, int lastIndex) 
-	throws Exception {
+	throws IOException, JavaFileReadException, SerializationException {
 		
 		if (log.isDebugEnabled()) {
 			log.debug("checkFileContentForFieldGenerics with file " + 
@@ -272,13 +323,13 @@ public class IsGwtRpcSerializable  {
 		
 		int index = memberContent.indexOf(fieldName, lastIndex);
 		if (index < 1) {
-			SerializationException ex = new SerializationException(
+			JavaFileReadException ex = new JavaFileReadException(
 					"Unable to find field " + fieldName + " in " +
 					classJavaFileName);
 			ex.fillInStackTrace();
 			throw ex;
 		} else if (index + fieldName.length() + 1 > memberContent.length()){
-			SerializationException ex = new SerializationException(
+			JavaFileReadException ex = new JavaFileReadException(
 					"Unable to find field " + fieldName + " in " +
 					classJavaFileName);
 			ex.fillInStackTrace();
@@ -348,7 +399,7 @@ public class IsGwtRpcSerializable  {
 				if (c == ',') {
 					
 					builder.setCheckingGeneric(true);
-					findAndAssertClass(sb.toString(), builder);
+					findAndAssertClassFromGenericJavaCodeName(sb.toString(), builder);
 					
 					sb = new StringBuilder();
 				} else {
@@ -356,7 +407,7 @@ public class IsGwtRpcSerializable  {
 				}
 			}
 			builder.setCheckingGeneric(true);
-			findAndAssertClass(sb.toString(), builder);
+			findAndAssertClassFromGenericJavaCodeName(sb.toString(), builder);
 			builder.setCheckingGeneric(false);
 			
 		}
@@ -368,35 +419,45 @@ public class IsGwtRpcSerializable  {
 	}
 	
 	
-	private static void findAndAssertClass(String className, IsGwtRpcBuilder builder) 
-		 throws Exception {
+	private static void findAndAssertClassFromGenericJavaCodeName(String className, IsGwtRpcBuilder builder) 
+		throws SerializationException {
+		
 		
 		className = className.trim();
 		if (log.isDebugEnabled()) {
-			log.debug("enter with findAndAssertClass " + className);
+			log.debug("enter with findAndAssertClassFromGenericJavaCodeName " + className);
 		}
-		
-		if (className.indexOf('.') != -1) {
-			if (log.isDebugEnabled()) {
-				log.debug("class " + className + " is a full name");
+		try  {
+			if (className.indexOf('.') != -1) {
+				if (log.isDebugEnabled()) {
+					log.debug("class " + className + " is a full name");
+				}
+				Class<?> clazz = Class.forName(className.trim());
+				IsGwtRpcBuilder newBuilder = new IsGwtRpcBuilder(builder);
+				newBuilder.setCurrentClass(clazz);
+				newBuilder.getCurrentClassParents().add(0, builder.getCurrentClass());
+				isRpcSerializable(newBuilder);
+			} else {
+				Class<?> clazz = COMMON_CLASSES.get(className);
+				if (clazz == null) {
+					clazz = obtainClassFromImports(className, builder);
+				} 
+				IsGwtRpcBuilder newBuilder = new IsGwtRpcBuilder(builder);
+				newBuilder.setCurrentClass(clazz);
+				newBuilder.getCurrentClassParents().add(0, builder.getCurrentClass());
+				isRpcSerializable(newBuilder);
 			}
-			Class<?> clazz = Class.forName(className);
-			IsGwtRpcBuilder newBuilder = new IsGwtRpcBuilder(builder);
-			newBuilder.getCurrentClassParents().add(0, clazz);
-			isRpcSerializable(newBuilder);
-		} else {
-			Class<?> clazz = COMMON_CLASSES.get(className);
-			if (clazz == null) {
-				clazz = obtainClassFromImports(className, builder);
-			} 
-			IsGwtRpcBuilder newBuilder = new IsGwtRpcBuilder(builder);
-			newBuilder.getCurrentClassParents().add(0, clazz);
-			isRpcSerializable(builder);
+		} catch (ClassNotFoundException x) {
+			SerializationException ex = new SerializationException("Unable to load locate class with name " +
+					className + " in java source code file " + builder.getCurrentClassJavaFileName() + 
+					" with parents " + builder.getCurrentClassParents());
+			ex.initCause(x);
+			throw ex;
 		}
 	}
 	
 	private static Class<?> obtainClassFromImports(String classShortName,IsGwtRpcBuilder builder) 
-		throws Exception {
+		throws ClassNotFoundException {
 		
 		
 		String content = builder.getCurrentClassMemberContent();
@@ -441,7 +502,7 @@ public class IsGwtRpcSerializable  {
 	 * @param in
 	 * @return
 	 */
-	private static String removeContent(Class<?> parent, String classJavaFileName) throws Exception {
+	private static String removeContent(Class<?> parent, String classJavaFileName) throws IOException {
 		
 		StringBuffer sb = new StringBuffer();
 		boolean inCBrace = false;
@@ -540,7 +601,7 @@ public class IsGwtRpcSerializable  {
 				log.debug("checking field " + field.getName());
 			}
 			
-			if (Modifier.isStatic(Modifier.STATIC)) {
+			if (Modifier.isStatic(field.getModifiers())) {
 				if (log.isDebugEnabled()) {
 					log.debug("skipping static field " + field.getName());
 				}

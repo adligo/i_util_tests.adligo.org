@@ -1,6 +1,6 @@
 package org.adligo.i.util.client.models.other_pkg;
 
-import java.sql.Date;
+import java.util.Date;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 

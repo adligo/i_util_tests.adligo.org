@@ -1,7 +1,8 @@
 package org.adligo.i.util.client.models;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Collection;
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class SimpleCollections implements Serializable {
 	 */
 	private Collection<String>	strings;
 	private Collection<Date>
-	dates;
+	dates = new ArrayList<Date>();
 	private Collection< Character> char_objs;
 	
 	private Collection<	Byte> byte_objs;

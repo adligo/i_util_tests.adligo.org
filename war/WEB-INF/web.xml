@@ -6,5 +6,13 @@
 	<welcome-file-list>
 	    <welcome-file>I_Util.html</welcome-file>
 	</welcome-file-list>
+	<servlet>
+		<servlet-name>TransportAllService</servlet-name>
+		<servlet-class>org.adligo.i.util.server.TransportAllServiceImpl</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>TransportAllService</servlet-name>
+		<url-pattern>/org.adligo.i.util.I_UtilTestModule/TransportAllService</url-pattern>
+	</servlet-mapping>
 
 </web-app>
