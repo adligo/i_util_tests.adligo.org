@@ -286,6 +286,9 @@ public class UtilEntryPoint implements EntryPoint {
 		holder.addUsed(TextFormatter.class);
 		holder.addUsed(ThreadPopulatorFactory.class);
 		
+		holder.addUsed(I_SystemOutput.class);
+		holder.addUsed(SystemOutput.INSTANCE);
+		
 		if (runningOutsideOfATest) {
 			sendRpc();
 		}
