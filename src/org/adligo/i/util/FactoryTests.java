@@ -114,11 +114,17 @@ public class FactoryTests extends ATest implements I_Listener {
 		assertNotNull("j2SE util should perform" +
 				"a sync creation of I_Map",
 				map);
+		assertNotNull("j2SE util should perform" +
+				" should not return a I_Map wrapping a null",
+				map.getWrapped());
 		assertEquals("j2SE return a wrapped HashMap",
 				HashMap.class, map.getWrapped().getClass());
 		I_Map map2 = MapFactory.create();
 		assertTrue("j2SE util create a new I_Map each time",
 				map != map2);
+		assertNotNull("j2SE util should perform" +
+				" should not return a I_Map wrapping a null",
+				map2.getWrapped());
 		assertTrue("j2SE util create a new I_Map each time",
 				map.getWrapped() != map2.getWrapped());
 		
