@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import org.adligo.i.util.client.I_Map;
+import org.adligo.i.util.client.MapFactory;
 import org.adligo.i.util.client.StringUtils;
 import org.adligo.j2se.util.MapWrapper;
 import org.adligo.tests.ATest;
@@ -82,6 +84,16 @@ public class StringUtilsTests extends ATest {
 		mem.assertUse(3000);
 	}
 	
+	public void testEmptyParsing() {
+		I_Map map = MapFactory.create();
+		String fileContent = "\n\r\n=him\n\r=\n\r";
+		StringUtils.parse(fileContent, map);
+		
+		assertEquals("" + map, 0, map.size());
+		
+	}
+	
+	@SuppressWarnings("unchecked")
 	private void assertParsing(String fileContent) {
 		MapWrapper mw = new MapWrapper(new HashMap());
 		StringUtils.parse(fileContent, mw);
@@ -91,8 +103,7 @@ public class StringUtilsTests extends ATest {
 		assertTrue("Should contain hey", keys.contains("hey"));
 		assertTrue("Should contain he", keys.contains("he"));
 		assertTrue("Should contain you", keys.contains("you"));
-		assertTrue("Should contain ''", keys.contains(""));
-		assertEquals("The size should be 4", 4, map.size());
+		assertEquals("The size should be 3", 3, map.size());
 		
 		assertEquals("The value should match", "hey_val", map.get("hey"));
 		assertEquals("The value should match", "she", map.get("he"));
