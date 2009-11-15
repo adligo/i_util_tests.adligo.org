@@ -259,6 +259,7 @@ public class UtilEntryPoint implements EntryPoint {
 		}
 		holder.addUsed(new ArrayCollection());
 		holder.addUsed(new ArrayIterator(new Object[]{}));
+		holder.addUsed(CommonTime.class);
 		holder.addUsed(ClassUtils.class);
 		holder.addUsed(CollectionFactory.class);
 		holder.addUsed(DoNothingListener.INSTANCE);
