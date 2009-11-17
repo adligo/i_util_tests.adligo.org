@@ -525,7 +525,7 @@ public class IsGwtRpcSerializable  {
 		
 		InputStream is = parent.getResourceAsStream(classJavaFileName);
 		if (log.isDebugEnabled()) {
-			log.debug("got input stream " + is);
+			log.debug("got input stream " + is + " parent is " + parent);
 		}
 		byte [] bytes = new byte[1];
 		while (is.read(bytes) != -1) {
