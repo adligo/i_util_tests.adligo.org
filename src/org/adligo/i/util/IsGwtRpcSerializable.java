@@ -17,6 +17,7 @@ import java.util.Set;
 import org.adligo.i.log.client.Log;
 import org.adligo.i.log.client.LogFactory;
 import org.adligo.i.util.client.ClassUtils;
+import org.adligo.i.util.client.StringUtils;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 import com.google.gwt.user.client.rpc.SerializationException;
@@ -364,7 +365,7 @@ public class IsGwtRpcSerializable  {
 			boolean inCarrot = false;
 			int nestedCarrots = 0;
 			
-			for (int i = index -2; i >= 0; i--) {
+			for (int i = index - 2; i >= 0; i--) {
 				char c = memberContent.charAt(i);
 				if (c == '<') {
 					if (nestedCarrots == 0) {
@@ -387,7 +388,7 @@ public class IsGwtRpcSerializable  {
 			}
 			String genericContent = sb.toString();
 			if (log.isDebugEnabled()) {
-				log.debug("got generic content " + genericContent);
+				log.debug("got generic content '" + genericContent + "'");
 			}
 			
 			
@@ -422,10 +423,13 @@ public class IsGwtRpcSerializable  {
 	private static void findAndAssertClassFromGenericJavaCodeName(String className, IsGwtRpcBuilder builder) 
 		throws SerializationException {
 		
+		if (StringUtils.isEmpty(className)) {
+			return;
+		}
 		
 		className = className.trim();
 		if (log.isDebugEnabled()) {
-			log.debug("enter with findAndAssertClassFromGenericJavaCodeName " + className);
+			log.debug("enter with findAndAssertClassFromGenericJavaCodeName '" + className + "'");
 		}
 		try  {
 			if (className.indexOf('.') != -1) {
@@ -445,6 +449,9 @@ public class IsGwtRpcSerializable  {
 				IsGwtRpcBuilder newBuilder = new IsGwtRpcBuilder(builder);
 				newBuilder.setCurrentClass(clazz);
 				newBuilder.getCurrentClassParents().add(0, builder.getCurrentClass());
+				if (log.isDebugEnabled()) {
+					log.debug("checking class "+ clazz + " from name '" + className + "'");
+				}
 				isRpcSerializable(newBuilder);
 			}
 		} catch (ClassNotFoundException x) {
@@ -502,7 +509,7 @@ public class IsGwtRpcSerializable  {
 	 * @param in
 	 * @return
 	 */
-	private static String removeContent(Class<?> parent, String classJavaFileName) throws IOException {
+	protected static String removeContent(Class<?> parent, String classJavaFileName) throws IOException {
 		
 		StringBuffer sb = new StringBuffer();
 		boolean inCBrace = false;
@@ -511,14 +518,37 @@ public class IsGwtRpcSerializable  {
 		int nestedBrase = 0;
 		
 		boolean foundFirstCBrase = false;
+		boolean inCommentSlash = false;
+		boolean inEndOfLineComment = false;
+		boolean inCommentGroup = false;
+		boolean inAstrisk = false;
+		
 		InputStream is = parent.getResourceAsStream(classJavaFileName);
 		if (log.isDebugEnabled()) {
 			log.debug("got input stream " + is);
 		}
 		byte [] bytes = new byte[1];
 		while (is.read(bytes) != -1) {
+			
+			
 			char c = (char) bytes[0];
-			if (c == '{') {
+			if (c == '/') {
+				if (inAstrisk) {
+					inCommentGroup = false;
+				} else if (inCommentSlash) {
+					inEndOfLineComment = true;
+				} else {
+					inCommentSlash = true;
+				}
+			} else if (c == '*') {
+				if (inCommentSlash) {
+					inCommentGroup = true;
+				}
+				inAstrisk = true;
+			} else if (c == '\n') {
+				inEndOfLineComment = false;
+				inCommentSlash = false;
+			} else if (c == '{') {
 				if (!foundFirstCBrase) {
 					foundFirstCBrase = true;
 					//keep first curly brace for import parsing
@@ -555,13 +585,17 @@ public class IsGwtRpcSerializable  {
 					}
 				}
 			} 
-			else {
-				if (!inCBrace && !inBrace) {
-					sb.append(c);
-				}
+			if (!inCBrace && !inBrace && !inCommentSlash && !inCommentGroup) {
+				sb.append(c);
+				inAstrisk = false;
 			}
 		}
 		is.close();
+		
+		
+		if (log.isDebugEnabled()) {
+			log.debug("returning \n" + sb.toString());
+		}
 		return sb.toString();
 	}
 
@@ -593,12 +627,13 @@ public class IsGwtRpcSerializable  {
 		if (log.isDebugEnabled()) {
 			log.debug("class " + clazz + " has a " + fields.length + " fields ");
 		}
-		builder.getCurrentClassParents().add(0, clazz);
+		IsGwtRpcBuilder newBuider = new IsGwtRpcBuilder(builder);
+		newBuider.getCurrentClassParents().add(0, clazz);
 		
 		for (int i = 0; i < fields.length; i++) {
 			Field field = fields[i];
 			if (log.isDebugEnabled()) {
-				log.debug("checking field " + field.getName());
+				log.debug("checking field " + field.getName() + " of " + clazz);
 			}
 			
 			if (Modifier.isStatic(field.getModifiers())) {
@@ -606,9 +641,10 @@ public class IsGwtRpcSerializable  {
 					log.debug("skipping static field " + field.getName());
 				}
 			} else {
-				builder.setCurrentClass(field.getType());
-				builder.setCurrentField(field.getName());
-				isRpcSerializable(builder);
+				
+				newBuider.setCurrentClass(field.getType());
+				newBuider.setCurrentField(field.getName());
+				isRpcSerializable(newBuider);
 			}
 		}
 	}

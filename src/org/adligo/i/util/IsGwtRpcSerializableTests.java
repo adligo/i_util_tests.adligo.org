@@ -7,8 +7,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.adligo.i.util.client.ClassUtils;
 import org.adligo.i.util.client.models.ComplexCollections;
 import org.adligo.i.util.client.models.SimpleCollections;
+import org.adligo.i.util.client.models.SimpleCollectionsWithComments;
 import org.adligo.i.util.client.models.SimpleFailureModel;
 import org.adligo.i.util.client.models.SimpleSerializable;
 import org.adligo.i.util.client.models.SimpleSqlDateFailureModel;
@@ -139,5 +141,14 @@ public class IsGwtRpcSerializableTests extends ATest {
 				"in class class java.sql.Date with parents " +
 				"[interface java.util.Collection, class org.adligo.i.util.client.models.SqlDateGeneicFailureModel]",
 				ex.getMessage());
+	}
+	
+	public void testSimpleCollectionsWithComments() throws Exception {
+		String resp = IsGwtRpcSerializable.removeContent(SimpleCollectionsWithComments.class, 
+				ClassUtils.getClassShortName(SimpleCollectionsWithComments.class) + ".java");
+		
+		assertFalse("shouldn't contain the test '* roles'", resp.contains("* roles"));
+		assertFalse("shouldn't contain the test '<TESTS!> roles'", resp.contains("<TESTS!> roles"));
+		IsGwtRpcSerializable.isRpcSerializable(SimpleCollectionsWithComments.class);
 	}
 }
