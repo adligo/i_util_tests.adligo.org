@@ -23,6 +23,7 @@ import org.adligo.i.util.client.TransportAllServiceAsync;
 import org.adligo.i.util.client.UtilEntryPoint;
 import org.adligo.i.util.client.models.ComplexCollections;
 import org.adligo.i.util.client.models.SimpleCollections;
+import org.adligo.i.util.client.models.SimpleCollectionsWithComments;
 import org.adligo.i.util.client.models.SimpleFailureModel;
 import org.adligo.i.util.client.models.SimpleSerializable;
 import org.adligo.i.util.client.models.SimpleSqlDateFailureModel;
@@ -43,6 +44,7 @@ public class GwtCompileUsedAllClassesTest extends ATest {
 		ignore.add(ClassUtils.getClassName(I_UsageHolder.class));
 		ignore.add(utilEntryPointClassName);
 		
+		ignore.add(ClassUtils.getClassName(SimpleCollectionsWithComments.class));
 		ignore.add(ClassUtils.getClassName(ComplexCollections.class));
 		ignore.add(ClassUtils.getClassName(SimpleCollections.class));
 		ignore.add(ClassUtils.getClassName(SimpleFailureModel.class));
@@ -78,7 +80,7 @@ public class GwtCompileUsedAllClassesTest extends ATest {
 		
 		Set<Class<?>> classes = GwtCompileUsedAllClassesAsserter.getClasses(
 				"org.adligo.i.util.client", ignore);
-		assertEquals("package org.adligo.i.util.client should contain classes", 31, classes.size());
+		assertEquals("package org.adligo.i.util.client should contain classes", 32, classes.size());
 		
 		GwtCompileUsedAllClassesAsserter holder = new GwtCompileUsedAllClassesAsserter();
 		UtilEntryPoint entryPoint = new UtilEntryPoint(holder);
