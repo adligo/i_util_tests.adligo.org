@@ -17,6 +17,7 @@ import java.util.Set;
 import org.adligo.i.log.client.Log;
 import org.adligo.i.log.client.LogFactory;
 import org.adligo.i.util.client.ClassUtils;
+import org.adligo.i.util.client.I_Serializable;
 import org.adligo.i.util.client.StringUtils;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
@@ -203,6 +204,12 @@ public class IsGwtRpcSerializable  {
 			} else if (asSet.contains(IsSerializable.class)) {
 				if (log.isDebugEnabled()) {
 					log.debug("class " + clazz + " implements " + IsSerializable.class);
+				}
+				assertFields(builder);
+				assertConstructors(clazz, parents);
+			} else if (asSet.contains(I_Serializable.class)) {
+				if (log.isDebugEnabled()) {
+					log.debug("class " + clazz + " implements " + I_Serializable.class);
 				}
 				assertFields(builder);
 				assertConstructors(clazz, parents);

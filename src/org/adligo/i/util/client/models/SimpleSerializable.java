@@ -1,9 +1,10 @@
 package org.adligo.i.util.client.models;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class SimpleSerializable implements Serializable {
+import org.adligo.i.util.client.I_Serializable;
+
+public class SimpleSerializable implements I_Serializable {
 	/**
 	 * 
 	 */
