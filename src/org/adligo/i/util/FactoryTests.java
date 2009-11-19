@@ -185,6 +185,7 @@ public class FactoryTests extends ATest implements I_Listener {
 	public void onEvent(I_Event p) {
 		if (p.getValue() instanceof PropertyFileReadException) {
 			lastReadException = (PropertyFileReadException) p.getValue();
+			log.error(lastReadException.getMessage(), lastReadException);
 		} else {
 			lastProperties = (I_Map) p.getValue();
 		}

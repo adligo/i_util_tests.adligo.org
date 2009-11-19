@@ -70,7 +70,7 @@ public class IsGwtRpcSerializableTests extends ATest {
 			ex = x;
 		}
 		assertNotNull(ex);
-		assertEquals("class class org.adligo.i.util.client.models.SimpleFailureModel" +
+		assertEquals("class org.adligo.i.util.client.models.SimpleFailureModel" +
 				" with parents [] is not serlizeable see log. ", ex.getMessage());
 	}
 	
