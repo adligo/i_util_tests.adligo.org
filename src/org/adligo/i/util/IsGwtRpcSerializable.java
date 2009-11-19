@@ -226,7 +226,7 @@ public class IsGwtRpcSerializable  {
 					}
 				} catch (Exception x) {
 					SerializationException ex = new SerializationException(
-							"class " + clazz + " with parents " + parents +
+							"" + clazz + " with parents " + parents +
 							" is not serlizeable see log. ");
 					ex.initCause(x);
 					throw ex;
