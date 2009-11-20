@@ -9,8 +9,11 @@ import java.util.Set;
 
 import org.adligo.i.util.client.ClassUtils;
 import org.adligo.i.util.client.models.ComplexCollections;
+import org.adligo.i.util.client.models.GenericEnum;
 import org.adligo.i.util.client.models.SimpleCollections;
 import org.adligo.i.util.client.models.SimpleCollectionsWithComments;
+import org.adligo.i.util.client.models.SimpleEnum;
+import org.adligo.i.util.client.models.SimpleEnumContainer;
 import org.adligo.i.util.client.models.SimpleFailureModel;
 import org.adligo.i.util.client.models.SimpleSerializable;
 import org.adligo.i.util.client.models.SimpleSqlDateFailureModel;
@@ -150,5 +153,21 @@ public class IsGwtRpcSerializableTests extends ATest {
 		assertFalse("shouldn't contain the test '* roles'", resp.contains("* roles"));
 		assertFalse("shouldn't contain the test '<TESTS!> roles'", resp.contains("<TESTS!> roles"));
 		IsGwtRpcSerializable.isRpcSerializable(SimpleCollectionsWithComments.class);
+	}
+	
+	public void testSimpleEnum() throws Exception {
+		IsGwtRpcSerializable.isRpcSerializable(SimpleEnum.class);
+	}
+	
+	public void testSimpleEnumContainer() throws Exception {
+		IsGwtRpcSerializable.isRpcSerializable(SimpleEnumContainer.class);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void testSimpleGenericEnum() throws Exception {
+		IsGwtRpcSerializable.isRpcSerializable(GenericEnum.class);
+		GenericEnum ge = new GenericEnum<SimpleEnum>();
+		ge.setT(SimpleEnum.HEY_ENUMS_TOO);
+		assertEquals(SimpleEnum.HEY_ENUMS_TOO, ge.getT());
 	}
 }

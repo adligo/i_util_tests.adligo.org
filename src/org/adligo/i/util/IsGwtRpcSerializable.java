@@ -25,6 +25,8 @@ import com.google.gwt.user.client.rpc.SerializationException;
 import com.google.gwt.user.server.rpc.impl.LegacySerializationPolicy;
 
 public class IsGwtRpcSerializable  {
+	public static final String MUST_DIRECTLY_EXTEND_OBJECT_OR_BE_A_ENUM = " must directly extend Object or be a enum";
+	public static final String YOUR_GWT_RPC_SERIALIZABLE_CLASS = "Your Gwt Rpc Serializable class ";
 	private static final Log log = LogFactory.getLog(IsGwtRpcSerializable.class);
 	private static Set<Character> WHITE_SPACE_CHARACTERS = getWhiteSpaceChars();
 	private static Map<String,Class<?>> COMMON_CLASSES = getCommonClasses();
@@ -126,10 +128,12 @@ public class IsGwtRpcSerializable  {
 		 *     
 		 */
 		if (superClazz != Object.class) {
-			SerializationException ex = new SerializationException("Your Gwt Rpc Serializable class " +
-					clazz + " must directly extend Object");
-			ex.fillInStackTrace();
-			throw ex;
+			if (!clazz.isEnum()) {
+				SerializationException ex = new SerializationException(YOUR_GWT_RPC_SERIALIZABLE_CLASS +
+						clazz + MUST_DIRECTLY_EXTEND_OBJECT_OR_BE_A_ENUM);
+				ex.fillInStackTrace();
+				throw ex;
+			}
 		}
 		
 		IsGwtRpcBuilder builder = new IsGwtRpcBuilder();
@@ -158,6 +162,12 @@ public class IsGwtRpcSerializable  {
 	private static void isRpcSerializable( IsGwtRpcBuilder builder) throws SerializationException {
 			Class<?> clazz = builder.getCurrentClass();
 			
+			if (clazz.isEnum()) {
+				if (log.isDebugEnabled()) {
+					log.debug(clazz + " is a enum which is ok. ");
+				}
+				return;
+			}
 			if (SPECIAL_COMMON_CLASSES.contains(clazz)) {
 				if (log.isDebugEnabled()) {
 					log.debug(clazz + " is a A special common class which is ok. ");

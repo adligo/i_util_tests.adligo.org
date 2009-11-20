@@ -22,8 +22,11 @@ import org.adligo.i.util.client.TransportAllService;
 import org.adligo.i.util.client.TransportAllServiceAsync;
 import org.adligo.i.util.client.UtilEntryPoint;
 import org.adligo.i.util.client.models.ComplexCollections;
+import org.adligo.i.util.client.models.GenericEnum;
 import org.adligo.i.util.client.models.SimpleCollections;
 import org.adligo.i.util.client.models.SimpleCollectionsWithComments;
+import org.adligo.i.util.client.models.SimpleEnum;
+import org.adligo.i.util.client.models.SimpleEnumContainer;
 import org.adligo.i.util.client.models.SimpleFailureModel;
 import org.adligo.i.util.client.models.SimpleSerializable;
 import org.adligo.i.util.client.models.SimpleSqlDateFailureModel;
@@ -46,6 +49,9 @@ public class GwtCompileUsedAllClassesTest extends ATest {
 		
 		ignore.add(ClassUtils.getClassName(SimpleCollectionsWithComments.class));
 		ignore.add(ClassUtils.getClassName(ComplexCollections.class));
+		ignore.add(ClassUtils.getClassName(GenericEnum.class));
+		ignore.add(ClassUtils.getClassName(SimpleEnum.class));
+		ignore.add(ClassUtils.getClassName(SimpleEnumContainer.class));
 		ignore.add(ClassUtils.getClassName(SimpleCollections.class));
 		ignore.add(ClassUtils.getClassName(SimpleFailureModel.class));
 		ignore.add(ClassUtils.getClassName(SimpleSerializable.class));
