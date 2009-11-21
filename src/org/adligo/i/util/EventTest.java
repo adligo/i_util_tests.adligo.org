@@ -19,18 +19,26 @@ public class EventTest extends ATest {
 		
 		e.setValue("that");
 		assertEquals("To String should match", 
-				"Event [source= instanceofString-HASH-3559070,value=that,exception=null]", 
+				"Event [source=this,value=that,exception=null]", 
 				e.toString());
 		
 		e.setException(new Exception("throwable"));
 		assertEquals("To String should match", 
-				"Event [source= instanceofString-HASH-3559070,value=that,exception=java.lang.Exception: throwable]", 
+				"Event [source=this,value=that,exception=java.lang.Exception: throwable]", 
+				e.toString());
+		
+		e = new Event();
+		e.setSource("<some huge ass string>could be html set as the souce of a event</some huge ass string>" +
+				"<note> I have found this to be somewhat poor form and I am mostly using enums for source now </note>" +
+				"<ps> although enums arn't on j2me so I guess I will go back to int's there (for switch stmts)</ps>");
+		
+		assertEquals("Event [source= instanceofString-HASH--745139899,value=null,exception=null]", 
 				e.toString());
 	}
 
 	private void assertSource(I_Event e) {
 		assertEquals("To String should match", 
-				"Event [source= instanceofString-HASH-3559070,value=null,exception=null]", 
+				"Event [source=this,value=null,exception=null]", 
 				e.toString());
 	}
 }
