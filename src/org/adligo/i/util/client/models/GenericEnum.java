@@ -7,7 +7,7 @@ public class GenericEnum<T extends Enum<?>> implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	T t;
+	protected T t;
 
 	public T getT() {
 		return t;

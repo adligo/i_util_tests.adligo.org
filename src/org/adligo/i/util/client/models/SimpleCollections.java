@@ -15,22 +15,22 @@ public class SimpleCollections implements Serializable {
 	 * note the funny formatting!
 	 * its part of the test!
 	 */
-	private Collection<String>	strings;
-	private Collection<Date>
+	protected Collection<String>	strings;
+	protected Collection<Date>
 	dates = new ArrayList<Date>();
-	private Collection< Character> char_objs;
+	protected Collection< Character> char_objs;
 	
-	private Collection<	Byte> byte_objs;
-	private Collection<
+	protected Collection<	Byte> byte_objs;
+	protected Collection<
 	Short> short_objs ;
-	private Collection<Integer
+	protected Collection<Integer
 	> int_objs;
-	private Collection<Boolean> boolean_objs	;
-	private Collection<	Float> float_objs
+	protected Collection<Boolean> boolean_objs	;
+	protected Collection<	Float> float_objs
 	;
 	
-	private Collection<Double > double_objs;
-	private Collection<Long> longs;
+	protected Collection<Double > double_objs;
+	protected Collection<Long> longs;
 	
 	public Collection<String> getStrings() {
 		{

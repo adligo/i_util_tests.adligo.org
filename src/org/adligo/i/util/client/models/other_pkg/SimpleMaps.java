@@ -11,23 +11,23 @@ public class SimpleMaps implements IsSerializable {
 	 * note the funny formatting!
 	 * its part of the test!
 	 */
-	private Map<String,Serializable> strings;
-	private Map<String,Date>
+	protected Map<String,Serializable> strings;
+	protected Map<String,Date>
 	dates;
 	
-	private Map<String,	Character> char_objs;
+	protected Map<String,	Character> char_objs;
 	
-	private Map<String,		Byte> byte_objs;
-	private Map<String,
+	protected Map<String,		Byte> byte_objs;
+	protected Map<String,
 		Short> short_objs ;
-	private Map<	String,Integer> int_objs;
-	private Map < String,Boolean> boolean_objs	;
-	private Map<
+	protected Map<	String,Integer> int_objs;
+	protected Map < String,Boolean> boolean_objs	;
+	protected Map<
 		String,	Float > float_objs
 	;
 	
-	private Map<Integer,Double	> double_objs;
-	private Map<
+	protected Map<Integer,Double	> double_objs;
+	protected Map<
 		Integer,
 		Long
 		> longs;

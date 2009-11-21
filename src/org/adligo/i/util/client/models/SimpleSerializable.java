@@ -8,25 +8,25 @@ public class SimpleSerializable implements I_Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	private char char_primitive;
-	private byte byte_primitive;
-	private short short_primitive;
-	private int int_primitive;
-	private long long_primitive;
-	private boolean boolean_primitive;
-	private float float_primitive;
-	private double double_primitive;
-	private String string;
-	private Date date;
-	private Character char_obj;
-	private Byte byte_obj;
-	private Short short_obj;
-	private Integer int_obj;
-	private Boolean boolean_obj;
-	private Float float_obj;
-	private Double double_obj;
-	private Long long_obj;
+	protected  static final long serialVersionUID = 1L;
+	protected  char char_primitive;
+	protected  byte byte_primitive;
+	protected  short short_primitive;
+	protected  int int_primitive;
+	protected  long long_primitive;
+	protected  boolean boolean_primitive;
+	protected  float float_primitive;
+	protected  double double_primitive;
+	protected  String string;
+	protected  Date date;
+	protected  Character char_obj;
+	protected  Byte byte_obj;
+	protected  Short short_obj;
+	protected  Integer int_obj;
+	protected  Boolean boolean_obj;
+	protected  Float float_obj;
+	protected  Double double_obj;
+	protected  Long long_obj;
 	
 	public String getString() {
 		return string;

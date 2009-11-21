@@ -12,9 +12,11 @@ import org.adligo.i.util.client.models.ComplexCollections;
 import org.adligo.i.util.client.models.GenericEnum;
 import org.adligo.i.util.client.models.SimpleCollections;
 import org.adligo.i.util.client.models.SimpleCollectionsWithComments;
+import org.adligo.i.util.client.models.SimpleDefaultFailure;
 import org.adligo.i.util.client.models.SimpleEnum;
 import org.adligo.i.util.client.models.SimpleEnumContainer;
 import org.adligo.i.util.client.models.SimpleFailureModel;
+import org.adligo.i.util.client.models.SimplePrivateFailure;
 import org.adligo.i.util.client.models.SimpleSerializable;
 import org.adligo.i.util.client.models.SimpleSqlDateFailureModel;
 import org.adligo.i.util.client.models.SimpleStaticFieldModel;
@@ -169,5 +171,29 @@ public class IsGwtRpcSerializableTests extends ATest {
 		GenericEnum ge = new GenericEnum<SimpleEnum>();
 		ge.setT(SimpleEnum.HEY_ENUMS_TOO);
 		assertEquals(SimpleEnum.HEY_ENUMS_TOO, ge.getT());
+	}
+	
+	public void testSimplePrivateFailure() throws Exception  {
+		SerializationException ex = null;
+		try {
+			IsGwtRpcSerializable.isRpcSerializable(SimplePrivateFailure.class);
+		} catch (SerializationException x) {
+			ex = x;
+		}
+		assertNotNull(ex);
+		assertEquals("private field dam NOT ALLOWED in class " +
+				"org.adligo.i.util.client.models.SimplePrivateFailure with parents []", ex.getMessage());
+	}
+	
+	public void testSimpleDefaultFailure() throws Exception  {
+		SerializationException ex = null;
+		try {
+			IsGwtRpcSerializable.isRpcSerializable(SimpleDefaultFailure.class);
+		} catch (SerializationException x) {
+			ex = x;
+		}
+		assertNotNull(ex);
+		assertEquals("(default visiblity) field doh NOT ALLOWED in " +
+				"class org.adligo.i.util.client.models.SimpleDefaultFailure with parents []", ex.getMessage());
 	}
 }

@@ -7,7 +7,7 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class SqlDateGeneicFailureModel implements IsSerializable {
 
-	private Collection<Date> sqlDateCollection;
+	protected Collection<Date> sqlDateCollection;
 
 	public Collection<Date> getSqlDateCollection() {
 		return sqlDateCollection;

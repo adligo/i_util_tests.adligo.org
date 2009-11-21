@@ -16,18 +16,18 @@ public class ComplexCollections implements Serializable {
 	/**
 	 * again funky formatting is part of this test
 	 */
-	private Collection<Collection<String>>	strings;
-	private Collection<Collection	<
+	protected Collection<Collection<String>>	strings;
+	protected Collection<Collection	<
 	Date>>
 	dates;
-	private Collection<
+	protected Collection<
 		Map<	Character,String	> > char_objs;
 	
 	//different package
-	private Collection<SimpleIsSerializable> is_serial_objs;
+	protected Collection<SimpleIsSerializable> is_serial_objs;
 	
 	//same package
-	private Collection<SimpleSerializable> serial_objs ;
+	protected Collection<SimpleSerializable> serial_objs ;
 
 	public Collection<Collection<String>> getStrings() {
 		return strings;

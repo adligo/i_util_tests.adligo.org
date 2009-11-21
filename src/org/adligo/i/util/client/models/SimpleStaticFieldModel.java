@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class SimpleStaticFieldModel implements Serializable {
 	private static final SimpleFailureModel STATIC = new SimpleFailureModel();
 	
-	private String field;
+	protected String field;
 
 	public String getField() {
 		return field;

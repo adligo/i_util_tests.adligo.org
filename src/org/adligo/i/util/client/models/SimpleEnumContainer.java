@@ -8,7 +8,7 @@ public class SimpleEnumContainer implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private Enum<?> se;
+	protected Enum<?> se;
 
 	public Enum<?> getSe() {
 		return se;

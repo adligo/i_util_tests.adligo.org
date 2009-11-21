@@ -11,24 +11,24 @@ public class ComplexMaps implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	protected static final long serialVersionUID = 1L;
 	/**
 	 * note the funny formatting!
 	 * its part of the test!
 	 */
-	private Map<String,SimpleIsSerializable> strings;
-	private Map<String,SimpleSerializable>
+	protected Map<String,SimpleIsSerializable> strings;
+	protected Map<String,SimpleSerializable>
 	dates;
 	
-	private Map<String,	Map	<
+	protected Map<String,	Map	<
 		SimpleIsSerializable, SimpleSerializable >> char_objs;
 	
-	private Map<String,		Collection<	SimpleIsSerializable >	> byte_objs;
-	private Map<String,
+	protected Map<String,		Collection<	SimpleIsSerializable >	> byte_objs;
+	protected Map<String,
 		Short> short_objs ;
-	private Map<	String,Integer> int_objs;
-	private Map < String,Boolean> boolean_objs	;
-	private Map<
+	protected Map<	String,Integer> int_objs;
+	protected Map < String,Boolean> boolean_objs	;
+	protected Map<
 		String,	Float > float_objs
 	;
 	public Map<String, SimpleIsSerializable> getStrings() {

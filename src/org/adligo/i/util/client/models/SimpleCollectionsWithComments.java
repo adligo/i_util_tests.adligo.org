@@ -10,7 +10,7 @@ public class SimpleCollectionsWithComments implements IsSerializable {
 	/**
 	 * roles
 	 */
-	private Set<String> roles = new HashSet<String>();
+	protected Set<String> roles = new HashSet<String>();
 	// <TESTS!> roles
 	
 }

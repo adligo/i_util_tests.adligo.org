@@ -10,7 +10,7 @@ public class SimpleSqlDateFailureModel implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private Date date;
+	protected Date date;
 
 	public Date getDate() {
 		return date;

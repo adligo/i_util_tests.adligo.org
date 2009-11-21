@@ -31,6 +31,9 @@ public class IsGwtRpcSerializable  {
 	private static Set<Character> WHITE_SPACE_CHARACTERS = getWhiteSpaceChars();
 	private static Map<String,Class<?>> COMMON_CLASSES = getCommonClasses();
 	private static Set<Class<?>> SPECIAL_COMMON_CLASSES = getSpecialCommonClasses();
+	public enum VISIBILITY {
+		PUBLIC, PROTECTED, DEFAULT, PRIVATE
+	}
 	
 	private static Set<Character> getWhiteSpaceChars() {
 		Set<Character> toRet = new HashSet<Character>();
@@ -640,9 +643,16 @@ public class IsGwtRpcSerializable  {
 
 	private static void assertFields(IsGwtRpcBuilder builder) throws SerializationException {
 		Class<?> clazz = builder.getCurrentClass();
+		if (Enum.class.isAssignableFrom(clazz)) {
+			if (log.isDebugEnabled()) {
+				log.debug("not checking the fields of " + Enum.class);
+			}
+			return;
+		}
+		
 		Field[] fields = clazz.getDeclaredFields();
 		if (log.isDebugEnabled()) {
-			log.debug("class " + clazz + " has a " + fields.length + " fields ");
+			log.debug("" + clazz + " has a " + fields.length + " fields ");
 		}
 		IsGwtRpcBuilder newBuider = new IsGwtRpcBuilder(builder);
 		newBuider.getCurrentClassParents().add(0, clazz);
@@ -657,12 +667,33 @@ public class IsGwtRpcSerializable  {
 				if (log.isDebugEnabled()) {
 					log.debug("skipping static field " + field.getName());
 				}
-			} else {
-				
+			}  else {
+				VISIBILITY vis = getVISIBILITY(field); 
+				switch (vis) {
+					case DEFAULT:
+						throw new SerializationException("(default visiblity) field " + field.getName() + " NOT ALLOWED in " + clazz + 
+								" with parents " + builder.getCurrentClassParents());
+					case PRIVATE:
+						throw new SerializationException("private field " + field.getName() + " NOT ALLOWED in " + clazz + 
+								" with parents " + builder.getCurrentClassParents());
+				}
 				newBuider.setCurrentClass(field.getType());
 				newBuider.setCurrentField(field.getName());
 				isRpcSerializable(newBuider);
 			}
 		}
+	}
+	
+	public static VISIBILITY getVISIBILITY(Field field ) {
+		if (Modifier.isPrivate(field.getModifiers())) {
+			return VISIBILITY.PRIVATE;
+		}
+		if (Modifier.isProtected(field.getModifiers())) {
+			return VISIBILITY.PROTECTED;
+		}
+		if (Modifier.isPublic(field.getModifiers())) {
+			return VISIBILITY.PUBLIC;
+		}
+		return VISIBILITY.DEFAULT;
 	}
 }
