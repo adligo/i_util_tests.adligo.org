@@ -103,7 +103,8 @@ public class FactoryTests extends ATest implements I_Listener {
 		PropertyFactory.get("/not_there.properties", this);
 		assertNotNull("There should be a exception for reading file not_there.properties", 
 				lastReadException);
-		assertNull(lastProperties);
+		assertNotNull(lastProperties);
+		assertEquals(0, lastProperties.size());
 	}
 	
 	
@@ -183,8 +184,9 @@ public class FactoryTests extends ATest implements I_Listener {
 	
 	@Override
 	public void onEvent(I_Event p) {
-		if (p.getValue() instanceof PropertyFileReadException) {
-			lastReadException = (PropertyFileReadException) p.getValue();
+		if (p.getException() instanceof PropertyFileReadException) {
+			lastProperties = (I_Map) p.getValue();
+			lastReadException = (PropertyFileReadException) p.getException();
 			log.error(lastReadException.getMessage(), lastReadException);
 		} else {
 			lastProperties = (I_Map) p.getValue();

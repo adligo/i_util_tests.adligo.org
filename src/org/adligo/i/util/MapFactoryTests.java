@@ -28,7 +28,7 @@ public class MapFactoryTests extends TestCase {
 			ex = e;
 		}
 		assertNotNull(ex);
-		assertEquals("org.adligo.i.util.client.CollectionFactory can't accept a null in parameter.", 
+		assertEquals("org.adligo.i.util.client.MapFactory can't accept a null in parameter.", 
 				ex.getMessage());
 		assertFalse(MapFactory.isInit());
 		
@@ -39,7 +39,7 @@ public class MapFactoryTests extends TestCase {
 			ex = e;
 		}
 		assertNotNull(ex);
-		assertEquals("org.adligo.i.util.client.CollectionFactory can't accept a null in parameter.", 
+		assertEquals("org.adligo.i.util.client.MapFactory can't accept a null in parameter.", 
 				ex.getMessage());
 		assertFalse(MapFactory.isInit());
 		
@@ -61,7 +61,7 @@ public class MapFactoryTests extends TestCase {
 			ex = e;
 		}
 		assertNotNull(ex);
-		assertEquals("org.adligo.i.util.client.CollectionFactory has already been initalized.", 
+		assertEquals("org.adligo.i.util.client.MapFactory has already been initalized.", 
 				ex.getMessage());
 		assertTrue(MapFactory.isInit());
 		
