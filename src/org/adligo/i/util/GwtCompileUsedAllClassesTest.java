@@ -90,7 +90,7 @@ public class GwtCompileUsedAllClassesTest extends ATest {
 		
 		Set<Class<?>> classes = GwtCompileUsedAllClassesAsserter.getClasses(
 				"org.adligo.i.util.client", ignore);
-		assertEquals("package org.adligo.i.util.client should contain classes", 32, classes.size());
+		assertEquals("package org.adligo.i.util.client should contain classes", 34, classes.size());
 		
 		GwtCompileUsedAllClassesAsserter holder = new GwtCompileUsedAllClassesAsserter();
 		UtilEntryPoint entryPoint = new UtilEntryPoint(holder);

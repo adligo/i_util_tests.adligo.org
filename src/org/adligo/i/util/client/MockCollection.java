@@ -37,4 +37,10 @@ public class MockCollection implements I_Collection {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public boolean contains(Object other) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

@@ -287,6 +287,8 @@ public class UtilEntryPoint implements EntryPoint {
 		holder.addUsed(StringUtils.class);
 		holder.addUsed(TextFormatter.class);
 		holder.addUsed(ThreadPopulatorFactory.class);
+		holder.addUsed(new HashLocation(0,1));
+		holder.addUsed(new HashCollection());
 		
 		holder.addUsed(I_SystemOutput.class);
 		holder.addUsed(SystemOutput.INSTANCE);
