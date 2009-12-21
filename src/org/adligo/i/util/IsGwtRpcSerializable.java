@@ -208,21 +208,15 @@ public class IsGwtRpcSerializable  {
 				asSet.add(classArray[i]);
 			}
 			
-			if (asSet.contains(Serializable.class)) {
+			if (implsSerializable(asSet)) {
 				if (log.isDebugEnabled()) {
 					log.debug("class " + clazz + " implements " + Serializable.class);
 				}
 				assertFields(builder);
 				assertConstructors(clazz, parents);
-			} else if (asSet.contains(IsSerializable.class)) {
+			} else if (implsIsSerializable(asSet)) {
 				if (log.isDebugEnabled()) {
 					log.debug("class " + clazz + " implements " + IsSerializable.class);
-				}
-				assertFields(builder);
-				assertConstructors(clazz, parents);
-			} else if (asSet.contains(I_Serializable.class)) {
-				if (log.isDebugEnabled()) {
-					log.debug("class " + clazz + " implements " + I_Serializable.class);
 				}
 				assertFields(builder);
 				assertConstructors(clazz, parents);
@@ -246,6 +240,30 @@ public class IsGwtRpcSerializable  {
 				}
 			}
 		
+	}
+
+	private static boolean implsIsSerializable(Set<Class<?>> asSet) {
+		if (asSet.contains(IsSerializable.class)) {
+			return true;
+		}
+		for (Class<?> c: asSet) {
+			if (IsSerializable.class.isAssignableFrom(c)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private static boolean implsSerializable(Set<Class<?>> asSet) {
+		if (asSet.contains(Serializable.class)) {
+			return true;
+		}
+		for (Class<?> c: asSet) {
+			if (Serializable.class.isAssignableFrom(c)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private static boolean isCollection(IsGwtRpcBuilder builder) throws SerializationException {
