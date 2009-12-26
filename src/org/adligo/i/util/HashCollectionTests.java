@@ -1,13 +1,12 @@
 package org.adligo.i.util;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.adligo.i.log.client.Log;
 import org.adligo.i.log.client.LogFactory;
 import org.adligo.i.util.client.HashCollection;
+import org.adligo.i.util.mocks.BadHashCode;
 import org.adligo.tests.ATest;
 
 public class HashCollectionTests extends ATest {
@@ -67,9 +66,11 @@ public class HashCollectionTests extends ATest {
 				Integer.MIN_VALUE, Integer.MAX_VALUE, span);
 		assertEquals(99, bucket);
 		
+		//bucket = HashCollection.getBucket(27296544, 8, 16777224, 1048576);
+		//assertNotNull(bucket);
 	}
 	
-	public void testAdd1000Numbers() { 
+	public void testAdd10000Numbers() { 
 		HashCollection container = new HashCollection();
 		int count = 0;
 		long lastTs = System.currentTimeMillis();
@@ -174,6 +175,41 @@ public class HashCollectionTests extends ATest {
 		assertEquals(0, container.size());
 	}
 	
+	public void testPut10000HashCodeDuplicates() { 
+		HashCollection container = new HashCollection();
+		int count = 0;
+		
+		Set<BadHashCode> allAdded = new HashSet<BadHashCode>();
+		
+		for (int i = 0; i < 10000; i++) {
+			BadHashCode ih = new BadHashCode(i);
+			assertTrue(container.add(ih));
+			assertTrue(allAdded.add(ih));
+			if (count == 1000) {
+				log.warn("calcing next 1 thousand hash code dupes i is " + i);
+				count = 0;
+			}
+			count++;
+		}
+		assertEquals(10000, container.size());
+		
+		for (int i = 0; i < 10000; i++) {
+			BadHashCode ih = new BadHashCode(i);
+			BadHashCode other = (BadHashCode) container.get(ih);
+			assertEquals(ih, other);
+			
+			assertEquals(10000 - i, container.size());
+			assertTrue(container.remove(ih));
+			if (count == 1000) {
+				log.warn("asserting next 1 thousand hash code dupes " + i);
+				count = 0;
+			}
+			count++;
+			
+		}
+		assertEquals(0, container.size());
+	}
+	
 	public void testEvery1000000Numbers() { 
 		HashCollection container = new HashCollection();
 		int count = 0;
@@ -250,6 +286,7 @@ public class HashCollectionTests extends ATest {
 		
 		assertEquals(0, container.size());
 	}
+	
 }
 
 class IntHash {
