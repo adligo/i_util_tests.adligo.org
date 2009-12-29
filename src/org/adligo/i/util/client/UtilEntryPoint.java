@@ -277,6 +277,7 @@ public class UtilEntryPoint implements EntryPoint {
 		addI_ThreadContainer();
 		addI_ThreadPopulator();
 		addI_Wrapper();
+		holder.addUsed(InstanceForName.class);
 		holder.addUsed(IteratorFactory.class);
 		holder.addUsed(new ListenerValueObject());
 		holder.addUsed(MapFactory.class);
