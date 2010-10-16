@@ -1,5 +1,8 @@
 package org.adligo.i.util;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
@@ -13,6 +16,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.StringTokenizer;
 
 import org.adligo.i.log.client.Log;
 import org.adligo.i.log.client.LogFactory;
@@ -547,7 +551,7 @@ public class IsGwtRpcSerializable  {
 	 * @param in
 	 * @return
 	 */
-	protected static String removeContent(Class<?> parent, String classJavaFileName) throws IOException {
+	protected static String removeContent(Class<?> parent, String classJavaFileName) throws IOException, SerializationException {
 		
 		StringBuffer sb = new StringBuffer();
 		boolean inCBrace = false;
@@ -561,10 +565,8 @@ public class IsGwtRpcSerializable  {
 		boolean inCommentGroup = false;
 		boolean inAstrisk = false;
 		
-		InputStream is = parent.getResourceAsStream(classJavaFileName);
-		if (log.isDebugEnabled()) {
-			log.debug("got input stream " + is + " parent is " + parent);
-		}
+		InputStream is = getInputStreamForClass(parent, classJavaFileName); 
+		
 		byte [] bytes = new byte[1];
 		while (is.read(bytes) != -1) {
 			
@@ -635,6 +637,37 @@ public class IsGwtRpcSerializable  {
 			log.debug("returning \n" + sb.toString());
 		}
 		return sb.toString();
+	}
+
+	protected static InputStream getInputStreamForClass(Class<?> parent,
+			String classJavaFileName) throws FileNotFoundException {
+		InputStream is = parent.getResourceAsStream(classJavaFileName);
+		if (log.isDebugEnabled()) {
+			log.debug("got input stream " + is + " parent is " + parent);
+		}
+		
+		File file = new File(".");
+		String absPath =  file.getAbsolutePath();
+		if (is == null) {
+			//try to load it from the filesystem directly (eclipse maven exc)
+			
+			absPath = absPath.substring(0, absPath.length() -1);
+			String fileSep = File.separator;
+			String className = parent.getName();
+			StringTokenizer tok = new StringTokenizer(className, ".");
+			
+			StringBuilder sb2 = new StringBuilder();
+			while (tok.hasMoreElements()) {
+				if (sb2.length() > 0) {
+					sb2.append(fileSep);
+				}
+				sb2.append(tok.nextElement());
+			}
+			String all = absPath + sb2.toString() + ".java";
+			is = new FileInputStream(all);
+			
+		}
+		return is;
 	}
 
 	private static void assertConstructors(Class<?> clazz, List<Class<?>> parents) throws SerializationException {
