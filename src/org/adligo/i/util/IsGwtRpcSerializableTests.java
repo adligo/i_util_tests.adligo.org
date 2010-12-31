@@ -173,27 +173,23 @@ public class IsGwtRpcSerializableTests extends ATest {
 		assertEquals(SimpleEnum.HEY_ENUMS_TOO, ge.getT());
 	}
 	
-	public void testSimplePrivateFailure() throws Exception  {
+	public void testSimplePrivatePass() throws Exception  {
 		SerializationException ex = null;
 		try {
 			IsGwtRpcSerializable.isRpcSerializable(SimplePrivateFailure.class);
 		} catch (SerializationException x) {
 			ex = x;
 		}
-		assertNotNull(ex);
-		assertEquals("private field dam NOT ALLOWED in class " +
-				"org.adligo.i.util.client.models.SimplePrivateFailure with parents []", ex.getMessage());
+		assertNull(ex);
 	}
 	
-	public void testSimpleDefaultFailure() throws Exception  {
+	public void testSimpleDefaultPass() throws Exception  {
 		SerializationException ex = null;
 		try {
 			IsGwtRpcSerializable.isRpcSerializable(SimpleDefaultFailure.class);
 		} catch (SerializationException x) {
 			ex = x;
 		}
-		assertNotNull(ex);
-		assertEquals("(default visiblity) field doh NOT ALLOWED in " +
-				"class org.adligo.i.util.client.models.SimpleDefaultFailure with parents []", ex.getMessage());
+		assertNull(ex);
 	}
 }

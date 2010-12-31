@@ -10,7 +10,6 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.Collection;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -21,7 +20,6 @@ import java.util.StringTokenizer;
 import org.adligo.i.log.client.Log;
 import org.adligo.i.log.client.LogFactory;
 import org.adligo.i.util.client.ClassUtils;
-import org.adligo.i.util.client.I_Serializable;
 import org.adligo.i.util.client.StringUtils;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
@@ -719,15 +717,6 @@ public class IsGwtRpcSerializable  {
 					log.debug("skipping static field " + field.getName());
 				}
 			}  else {
-				VISIBILITY vis = getVISIBILITY(field); 
-				switch (vis) {
-					case DEFAULT:
-						throw new SerializationException("(default visiblity) field " + field.getName() + " NOT ALLOWED in " + clazz + 
-								" with parents " + builder.getCurrentClassParents());
-					case PRIVATE:
-						throw new SerializationException("private field " + field.getName() + " NOT ALLOWED in " + clazz + 
-								" with parents " + builder.getCurrentClassParents());
-				}
 				newBuider.setCurrentClass(field.getType());
 				newBuider.setCurrentField(field.getName());
 				isRpcSerializable(newBuider);

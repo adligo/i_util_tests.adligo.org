@@ -265,7 +265,6 @@ public class UtilEntryPoint implements EntryPoint {
 		holder.addUsed(DoNothingListener.INSTANCE);
 		holder.addUsed(new Event());
 		addI_Collection();
-		holder.addUsed(I_Serializable.class);
 		addI_Disposible();
 		addI_Event();
 		addI_Factory();

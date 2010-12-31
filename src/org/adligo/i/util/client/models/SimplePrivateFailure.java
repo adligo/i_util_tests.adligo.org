@@ -1,8 +1,9 @@
 package org.adligo.i.util.client.models;
 
-import org.adligo.i.util.client.I_Serializable;
+import java.io.Serializable;
 
-public class SimplePrivateFailure implements I_Serializable {
+
+public class SimplePrivateFailure implements Serializable {
  /**
 	 * 
 	 */

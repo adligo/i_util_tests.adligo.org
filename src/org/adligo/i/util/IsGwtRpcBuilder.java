@@ -67,6 +67,4 @@ public class IsGwtRpcBuilder {
 	public void setCheckingGeneric(boolean checkingGeneric) {
 		this.checkingGeneric = checkingGeneric;
 	}
-	
-	
 }
