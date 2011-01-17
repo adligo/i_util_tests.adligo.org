@@ -7,7 +7,7 @@ import java.util.Set;
 import org.adligo.i.util.client.I_Map;
 import org.adligo.i.util.client.MapFactory;
 import org.adligo.i.util.client.StringUtils;
-import org.adligo.j2se.util.MapWrapper;
+import org.adligo.jse.util.MapWrapper;
 import org.adligo.tests.ATest;
 
 public class StringUtilsTests extends ATest {

@@ -19,7 +19,7 @@ import org.adligo.i.util.client.IteratorFactory;
 import org.adligo.i.util.client.MapFactory;
 import org.adligo.i.util.client.PropertyFactory;
 import org.adligo.i.util.client.PropertyFileReadException;
-import org.adligo.j2se.util.J2SEPlatform;
+import org.adligo.jse.util.JSEPlatform;
 import org.adligo.tests.ATest;
 
 import junit.framework.TestCase;
@@ -48,7 +48,7 @@ public class FactoryTests extends ATest implements I_Listener {
 	I_Map lastProperties;
 	
 	public void setUp() throws Exception {
-		J2SEPlatform.init();
+		JSEPlatform.init();
 	}
 	
 	/**

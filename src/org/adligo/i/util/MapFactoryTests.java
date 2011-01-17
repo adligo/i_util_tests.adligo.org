@@ -9,7 +9,7 @@ import org.adligo.i.util.client.MockImmutableMap;
 import org.adligo.i.util.client.MockMap;
 import org.adligo.i.util.mocks.MockMapFactory;
 import org.adligo.i.util.mocks.MockMapFactory.INIT_TYPES;
-import org.adligo.j2se.util.J2SEPlatform;
+import org.adligo.jse.util.JSEPlatform;
 
 public class MapFactoryTests extends TestCase {
 
@@ -81,6 +81,6 @@ public class MapFactoryTests extends TestCase {
 	protected void tearDown() throws Exception {
 		super.tearDown();
 		MockMapFactory.unInit();
-		J2SEPlatform.init();
+		JSEPlatform.init();
 	}
 }

@@ -13,7 +13,7 @@ import org.adligo.i.util.client.MockMap;
 import org.adligo.i.util.client.PropertyFactory;
 import org.adligo.i.util.mocks.MockIteratorFactory;
 import org.adligo.i.util.mocks.MockPropertyFactory;
-import org.adligo.j2se.util.J2SEPlatform;
+import org.adligo.jse.util.JSEPlatform;
 
 public class PropertyFactoryTests extends TestCase {
 	I_Map props = null;
@@ -72,6 +72,6 @@ public class PropertyFactoryTests extends TestCase {
 	protected void tearDown() throws Exception {
 		super.tearDown();
 		MockPropertyFactory.uninit();
-		J2SEPlatform.init();
+		JSEPlatform.init();
 	}
 }

@@ -8,7 +8,7 @@ import org.adligo.i.util.client.MockCollection;
 import org.adligo.i.util.client.MockIterator;
 import org.adligo.i.util.mocks.MockCollectionFactory;
 import org.adligo.i.util.mocks.MockIteratorFactory;
-import org.adligo.j2se.util.J2SEPlatform;
+import org.adligo.jse.util.JSEPlatform;
 
 import junit.framework.TestCase;
 
@@ -62,6 +62,6 @@ public class IteratorFactoryTests extends TestCase {
 	protected void tearDown() throws Exception {
 		super.tearDown();
 		MockIteratorFactory.uninit();
-		J2SEPlatform.init();
+		JSEPlatform.init();
 	}
 }

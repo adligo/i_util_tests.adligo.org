@@ -21,7 +21,7 @@ import org.adligo.i.util.mocks.MockIteratorFactory;
 import org.adligo.i.util.mocks.MockPropertyFactory;
 import org.adligo.i.util.mocks.MockTextFormatterFactory;
 import org.adligo.i.util.mocks.MockThreadPopulatorFactory;
-import org.adligo.j2se.util.J2SEPlatform;
+import org.adligo.jse.util.JSEPlatform;
 
 public class TextFormatterTests extends TestCase {
 	
@@ -75,6 +75,6 @@ public class TextFormatterTests extends TestCase {
 	protected void tearDown() throws Exception {
 		super.tearDown();
 		MockTextFormatterFactory.uninit();
-		J2SEPlatform.init();
+		JSEPlatform.init();
 	}
 }

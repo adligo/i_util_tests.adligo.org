@@ -17,7 +17,7 @@ import org.adligo.i.util.client.ThreadPopulatorFactory;
 import org.adligo.i.util.mocks.MockIteratorFactory;
 import org.adligo.i.util.mocks.MockPropertyFactory;
 import org.adligo.i.util.mocks.MockThreadPopulatorFactory;
-import org.adligo.j2se.util.J2SEPlatform;
+import org.adligo.jse.util.JSEPlatform;
 
 public class ThreadPopulatorFactoryTests extends TestCase {
 	
@@ -71,6 +71,6 @@ public class ThreadPopulatorFactoryTests extends TestCase {
 	protected void tearDown() throws Exception {
 		super.tearDown();
 		MockThreadPopulatorFactory.uninit();
-		J2SEPlatform.init();
+		JSEPlatform.init();
 	}
 }
