@@ -4,12 +4,12 @@
 	<classpathentry kind="src" path="src_runtime"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/i_util"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/j2se_util"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/i_log"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/tests"/>
 	<classpathentry kind="var" path="GWT_HOME/gwt-user.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/adi"/>
 	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/jse_util"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>
