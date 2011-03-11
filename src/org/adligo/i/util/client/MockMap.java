@@ -14,11 +14,6 @@ public class MockMap implements I_Map {
 		return 0;
 	}
 	
-	@Override
-	public I_Iterator keys() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
 	@Override
 	public boolean isEmpty() {
@@ -27,7 +22,13 @@ public class MockMap implements I_Map {
 	}
 	
 	@Override
-	public I_Iterator getIterator() {
+	public I_Iterator getKeysIterator() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public I_Iterator getValuesIterator() {
 		// TODO Auto-generated method stub
 		return null;
 	}

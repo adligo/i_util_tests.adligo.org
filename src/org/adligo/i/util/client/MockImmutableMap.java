@@ -21,7 +21,7 @@ public class MockImmutableMap implements I_ImmutableMap {
 	}
 
 	@Override
-	public I_Iterator getIterator() {
+	public I_Iterator getKeysIterator() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -33,7 +33,7 @@ public class MockImmutableMap implements I_ImmutableMap {
 	}
 
 	@Override
-	public I_Iterator keys() {
+	public I_Iterator getValuesIterator() {
 		// TODO Auto-generated method stub
 		return null;
 	}

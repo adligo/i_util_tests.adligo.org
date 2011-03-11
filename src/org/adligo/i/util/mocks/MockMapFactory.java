@@ -7,7 +7,7 @@ import org.adligo.i.util.client.MockMap;
 public class MockMapFactory extends MapFactory implements I_Factory {
 
 	public enum INIT_TYPES  {
-		BOTH_NULL, NULL_IMUTE, NULL_ME
+		BOTH_NULL, NULL_IMUTE, NULL_ME, NULL_SYNC
 	}
 	
 	public static void unInit() {
@@ -18,19 +18,22 @@ public class MockMapFactory extends MapFactory implements I_Factory {
 	public MockMapFactory(INIT_TYPES p) throws Exception {
 		switch (p) {
 			case BOTH_NULL:
-				MapFactory.init(null, null);
+				MapFactory.init(null, null,null);
 				break;
 			case NULL_IMUTE:
-				MapFactory.init(this, null);
+				MapFactory.init(this, null,null);
+				break;
+			case NULL_SYNC:
+				MapFactory.init(this, new MockImmutableMapFactory(),null);
 				break;
 			case NULL_ME:
 				I_Factory fact = null;
-				MapFactory.init(fact, new MockImmutableMapFactory());	
+				MapFactory.init(fact, new MockImmutableMapFactory(), fact);	
 		}
 	}
 	
 	public MockMapFactory() throws Exception {
-		MapFactory.init(this, new MockImmutableMapFactory());	
+		MapFactory.init(this, new MockImmutableMapFactory(),this);	
 	}
 
 	@Override
