@@ -14,7 +14,6 @@ import org.adligo.i.util.client.models.SimpleStaticFieldModel;
 import org.adligo.i.util.client.models.other_pkg.ComplexMaps;
 import org.adligo.i.util.client.models.other_pkg.SimpleIsSerializable;
 import org.adligo.i.util.client.models.other_pkg.SimpleMaps;
-import org.adligo.i.util.mocks.MockThrowableHelper;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.Timer;

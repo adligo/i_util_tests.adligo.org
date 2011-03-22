@@ -1,4 +1,4 @@
-package org.adligo.i.util.mocks;
+package org.adligo.i.util.client;
 
 import org.adligo.i.util.client.I_ThrowableHelper;
 
