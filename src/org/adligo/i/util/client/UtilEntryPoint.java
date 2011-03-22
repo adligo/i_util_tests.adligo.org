@@ -14,6 +14,7 @@ import org.adligo.i.util.client.models.SimpleStaticFieldModel;
 import org.adligo.i.util.client.models.other_pkg.ComplexMaps;
 import org.adligo.i.util.client.models.other_pkg.SimpleIsSerializable;
 import org.adligo.i.util.client.models.other_pkg.SimpleMaps;
+import org.adligo.i.util.mocks.MockThrowableHelper;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.Timer;
@@ -275,6 +276,7 @@ public class UtilEntryPoint implements EntryPoint {
 		addI_TextFormatter();
 		addI_ThreadContainer();
 		addI_ThreadPopulator();
+		addI_ThrowableHelper();
 		addI_Wrapper();
 		holder.addUsed(InstanceForName.class);
 		holder.addUsed(IteratorFactory.class);
@@ -287,6 +289,7 @@ public class UtilEntryPoint implements EntryPoint {
 		holder.addUsed(StringUtils.class);
 		holder.addUsed(TextFormatter.class);
 		holder.addUsed(ThreadPopulatorFactory.class);
+		holder.addUsed(ThrowableHelperFactory.class);
 		holder.addUsed(new HashLocation(0,1));
 		holder.addUsed(new HashCollection());
 		holder.addUsed(new HashDupeCollection());
@@ -299,6 +302,11 @@ public class UtilEntryPoint implements EntryPoint {
 		}
 	}
 
+	private void addI_ThrowableHelper() {
+		new MockThrowableHelper();
+		holder.addUsed(I_ThrowableHelper.class);
+	}
+	
 	private void addI_Wrapper() {
 		new MockWrapper();
 		holder.addUsed(I_Wrapper.class);
