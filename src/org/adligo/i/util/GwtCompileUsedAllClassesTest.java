@@ -17,6 +17,7 @@ import org.adligo.i.util.client.MockMap;
 import org.adligo.i.util.client.MockTextFormatter;
 import org.adligo.i.util.client.MockThreadContainer;
 import org.adligo.i.util.client.MockThreadPopulator;
+import org.adligo.i.util.client.MockThrowableHelper;
 import org.adligo.i.util.client.MockWrapper;
 import org.adligo.i.util.client.TransportAllService;
 import org.adligo.i.util.client.TransportAllServiceAsync;
@@ -79,6 +80,7 @@ public class GwtCompileUsedAllClassesTest extends ATest {
 		ignore.add(ClassUtils.getClassName(MockThreadContainer.class));
 		ignore.add(ClassUtils.getClassName(MockThreadPopulator.class));
 		ignore.add(ClassUtils.getClassName(MockWrapper.class));
+		ignore.add(ClassUtils.getClassName(MockThrowableHelper.class));
 		
 		ignore.add(ClassUtils.getClassName(TransportAllService.class));
 		ignore.add(ClassUtils.getClassName(TransportAllService.Util.class));
