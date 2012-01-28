@@ -257,6 +257,7 @@ public class UtilEntryPoint implements EntryPoint {
 			RootPanel.get().add(view);
 			runningOutsideOfATest = true;
 		}
+		holder.addUsed(AppenderFactory.class);
 		holder.addUsed(new ArrayCollection());
 		holder.addUsed(new ArrayIterator(new Object[]{}));
 		holder.addUsed(CommonTime.class);
