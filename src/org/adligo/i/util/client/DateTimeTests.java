@@ -3,49 +3,52 @@ package org.adligo.i.util.client;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.adligo.i.log.client.Log;
+import org.adligo.i.log.client.LogFactory;
 import org.adligo.tests.ATest;
 
 
 public class DateTimeTests extends ATest {
+	private static final Log log = LogFactory.getLog(DateTimeTests.class);
 
 	public void testYear() {
 		DateTime dt = new DateTime(0);
 		assertEquals(1969,dt.getYear());
-		dt = new DateTime(CommonTime.ONE_DAY);
+		dt = new DateTime(DateTime.ONE_DAY);
 		assertEquals(1970,dt.getYear());
 	}
 	
 	public void testMonth() {
 		DateTime dt = new DateTime(0);
 		assertEquals(12,dt.getMonth());
-		dt = new DateTime(CommonTime.ONE_DAY);
+		dt = new DateTime(DateTime.ONE_DAY);
 		assertEquals(1,dt.getMonth());
 	}
 	
 	public void testDayOfMonth() {
 		DateTime dt = new DateTime(0);
 		assertEquals(31,dt.getDayOfMonth());
-		dt = new DateTime(CommonTime.ONE_DAY);
+		dt = new DateTime(DateTime.ONE_DAY);
 		assertEquals(1,dt.getDayOfMonth());
 	}
 	
 	public void testHourOfMonth() {
 		DateTime dt = new DateTime(0);
 		assertEquals(6,dt.getHourOfDay());
-		dt = new DateTime(CommonTime.ONE_HOUR);
+		dt = new DateTime(DateTime.ONE_HOUR);
 		assertEquals(7,dt.getHourOfDay());
 		
-		dt = new DateTime(-1 * CommonTime.ONE_HOUR);
+		dt = new DateTime(-1 * DateTime.ONE_HOUR);
 		assertEquals(5,dt.getHourOfDay());
 	}
 	
 	public void testMinuteOfHour() {
 		DateTime dt = new DateTime(0);
 		assertEquals(0,dt.getMinuteOfHour());
-		dt = new DateTime(CommonTime.ONE_MINUTE);
+		dt = new DateTime(DateTime.ONE_MINUTE);
 		assertEquals(1,dt.getMinuteOfHour());
 		
-		dt = new DateTime(-1 * CommonTime.ONE_MINUTE);
+		dt = new DateTime(-1 * DateTime.ONE_MINUTE);
 		assertEquals(59,dt.getMinuteOfHour());
 	}
 	
@@ -71,26 +74,26 @@ public class DateTimeTests extends ATest {
 	
 	public void testDow() {
 		
-		DateTime dt = new DateTime(CommonTime.ONE_DAY * -2);
-		assertEquals(CommonTime.MONDAY,dt.getDayOfWeek());
+		DateTime dt = new DateTime(DateTime.ONE_DAY * -2);
+		assertEquals(DateTime.MONDAY,dt.getDayOfWeek());
 		
-		dt = new DateTime(CommonTime.ONE_DAY * -1);
-		assertEquals(CommonTime.TUESDAY,dt.getDayOfWeek());
+		dt = new DateTime(DateTime.ONE_DAY * -1);
+		assertEquals(DateTime.TUESDAY,dt.getDayOfWeek());
 		
 		dt = new DateTime(1);
-		assertEquals(CommonTime.WENSDAY,dt.getDayOfWeek());
+		assertEquals(DateTime.WENSDAY,dt.getDayOfWeek());
 		
-		dt = new DateTime(CommonTime.ONE_DAY);
-		assertEquals(CommonTime.THURSDAY,dt.getDayOfWeek());
+		dt = new DateTime(DateTime.ONE_DAY);
+		assertEquals(DateTime.THURSDAY,dt.getDayOfWeek());
 		
-		dt = new DateTime(CommonTime.ONE_DAY * 2);
-		assertEquals(CommonTime.FRIDAY,dt.getDayOfWeek());
+		dt = new DateTime(DateTime.ONE_DAY * 2);
+		assertEquals(DateTime.FRIDAY,dt.getDayOfWeek());
 		
-		dt = new DateTime(CommonTime.ONE_DAY * 3);
-		assertEquals(CommonTime.SATURDAY,dt.getDayOfWeek());
+		dt = new DateTime(DateTime.ONE_DAY * 3);
+		assertEquals(DateTime.SATURDAY,dt.getDayOfWeek());
 		
-		dt = new DateTime(CommonTime.ONE_DAY * 4);
-		assertEquals(CommonTime.SUNDAY,dt.getDayOfWeek());
+		dt = new DateTime(DateTime.ONE_DAY * 4);
+		assertEquals(DateTime.SUNDAY,dt.getDayOfWeek());
 	}
 	
 	public void testToString() throws Exception {
@@ -119,5 +122,72 @@ public class DateTimeTests extends ATest {
 		
 		dt = new DateTime(1331346065687L);
 		assertEquals(69, dt.getDayOfYear());
+	}
+	
+	
+	public void testIsLeapYear() {
+		assertTrue(DateTime.isLeapYear(2000));
+		boolean [] leapB = new boolean [] {true, false, false, false};
+		short leapBid = 0;
+		for (int i = 2000; i < 3000; i++) {
+			boolean shouldBeLeap = leapB[leapBid];
+			leapBid++;
+			if (leapBid >= 4) {
+				leapBid = 0;
+			}
+			
+			boolean isALeap = DateTime.isLeapYear(i);
+			log.debug("year " +i + " is a leap year? " + isALeap + 
+					" and should be? " + shouldBeLeap);
+			if (shouldBeLeap) {
+				assertTrue("the year " + i + " should be a leap year", 
+						isALeap);
+				assertTrue("the year " + i + " should be a leap year", 
+						isALeap == shouldBeLeap);
+			} else {
+				assertFalse("the year " + i + " should NOT be a leap year", 
+						isALeap);
+				assertTrue("the year " + i + " should NOT be a leap year", 
+						isALeap == shouldBeLeap);
+			}
+		}
+		
+		leapBid = 0;
+		for (int i = 2000; i > -3000; i--) {
+			boolean shouldBeLeap = leapB[leapBid];
+			if (i == 4) {
+				System.out.println("hey");
+			}
+			leapBid++;
+			if (leapBid >= 4) {
+				leapBid = 0;
+			}
+			
+			boolean isALeap = DateTime.isLeapYear(i);
+			log.debug("year " +i + " is a leap year? " + isALeap + 
+					" and should be? " + shouldBeLeap);
+			if (shouldBeLeap) {
+				assertTrue("the year " + i + " should be a leap year", 
+						isALeap);
+				assertTrue("the year " + i + " should be a leap year", 
+						isALeap == shouldBeLeap);
+			} else {
+				assertFalse("the year " + i + " should NOT be a leap year", 
+						isALeap);
+				assertTrue("the year " + i + " should NOT be a leap year", 
+						isALeap == shouldBeLeap);
+			}
+		}
+	}
+	
+
+	public void testGetDaysInMonth() {
+		assertEquals(29, DateTime.getDaysInMonth(DateTime.FEBUARY, 2000));
+		assertEquals(28, DateTime.getDaysInMonth(DateTime.FEBUARY, 2001));
+	}
+	
+	public void testDaysYearMonth() {
+		assertEquals(366, DateTime.getDaysInYear(2000));
+		assertEquals(365, DateTime.getDaysInYear(2001));
 	}
 }

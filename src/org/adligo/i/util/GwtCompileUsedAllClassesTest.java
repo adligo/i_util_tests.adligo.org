@@ -3,7 +3,6 @@ package org.adligo.i.util;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.adligo.i.util.client.CommonTimeTest;
 import org.adligo.i.util.client.ClassUsageView;
 import org.adligo.i.util.client.ClassUtils;
 import org.adligo.i.util.client.DateTimeTests;
@@ -54,7 +53,6 @@ public class GwtCompileUsedAllClassesTest extends ATest {
 		
 		ignore.add(ClassUtils.getClassName(SimpleCollectionsWithComments.class));
 		ignore.add(ClassUtils.getClassName(DateTimeTests.class));
-		ignore.add(ClassUtils.getClassName(CommonTimeTest.class));
 		ignore.add(ClassUtils.getClassName(ComplexCollections.class));
 		ignore.add(ClassUtils.getClassName(GenericEnum.class));
 		ignore.add(ClassUtils.getClassName(SimpleEnum.class));
@@ -96,7 +94,7 @@ public class GwtCompileUsedAllClassesTest extends ATest {
 		
 		Set<Class<?>> classes = GwtCompileUsedAllClassesAsserter.getClasses(
 				"org.adligo.i.util.client", ignore);
-		assertEquals("package org.adligo.i.util.client should contain classes", 40, classes.size());
+		assertEquals("package org.adligo.i.util.client should contain classes", 39, classes.size());
 		
 		GwtCompileUsedAllClassesAsserter holder = new GwtCompileUsedAllClassesAsserter();
 		UtilEntryPoint entryPoint = new UtilEntryPoint(holder);
