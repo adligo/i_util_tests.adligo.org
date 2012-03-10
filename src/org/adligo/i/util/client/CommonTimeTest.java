@@ -72,10 +72,5 @@ public class CommonTimeTest extends ATest {
 		assertEquals(366, CommonTime.getDaysInYear(2000));
 		assertEquals(365, CommonTime.getDaysInYear(2001));
 	}
-	
-	public void testDayOfMonth() {
-		assertEquals(1, CommonTime.getDayOfYear(2000, 1, 1));
-		assertEquals(365, CommonTime.getDayOfYear(2001, 12, 31));
-		assertEquals(366, CommonTime.getDayOfYear(2000, 12, 31));
-	}
+
 }
