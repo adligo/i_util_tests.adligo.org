@@ -6,6 +6,7 @@ import java.util.Set;
 import org.adligo.i.util.client.CommonTimeTest;
 import org.adligo.i.util.client.ClassUsageView;
 import org.adligo.i.util.client.ClassUtils;
+import org.adligo.i.util.client.DateTimeTests;
 import org.adligo.i.util.client.I_UsageHolder;
 import org.adligo.i.util.client.MockCollection;
 import org.adligo.i.util.client.MockDisposable;
@@ -52,6 +53,7 @@ public class GwtCompileUsedAllClassesTest extends ATest {
 		ignore.add(utilEntryPointClassName);
 		
 		ignore.add(ClassUtils.getClassName(SimpleCollectionsWithComments.class));
+		ignore.add(ClassUtils.getClassName(DateTimeTests.class));
 		ignore.add(ClassUtils.getClassName(CommonTimeTest.class));
 		ignore.add(ClassUtils.getClassName(ComplexCollections.class));
 		ignore.add(ClassUtils.getClassName(GenericEnum.class));
