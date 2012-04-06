@@ -122,6 +122,14 @@ public class DateTimeTests extends ATest {
 		
 		dt = new DateTime(1331346065687L);
 		assertEquals(69, dt.getDayOfYear());
+		
+		date = sdf.parse("03/04/2012");
+		dt = new DateTime(date.getTime());
+		assertEquals(64, dt.getDayOfYear());
+		//should be the same date with a different time
+		dt = new DateTime(1261634400000L);
+		String asSTring = dt.toString();
+		assertEquals(asSTring, 64, dt.getDayOfYear());
 	}
 	
 	
