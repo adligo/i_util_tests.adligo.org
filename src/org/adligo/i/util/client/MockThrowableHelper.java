@@ -9,7 +9,6 @@ public class MockThrowableHelper implements I_ThrowableHelper {
 	private String lastGetStackTraceAsStringPreText;
 	private String lastGetStackTraceAsStringLineFeed;
 	private I_Appender lastGetStackTraceAsStringAppender;
-	private String nextStackTraceAsStringReturn = null;
 	
 	@Override
 	public void fillInStackTrace(Throwable p) {
@@ -17,27 +16,12 @@ public class MockThrowableHelper implements I_ThrowableHelper {
 	}
 
 	@Override
-	public String getStackTraceAsString(Throwable p) {
-		lastGetStackTraceAsStringThrowable = p;
-		return nextStackTraceAsStringReturn;
-	}
-
-	@Override
-	public String getStackTraceAsString(String preText, Throwable p,
+	public void appendStackTracesString(String preText, Throwable p,
 			String lineFeed, I_Appender appender) {
 		lastGetStackTraceAsStringThrowable = p;
 		lastGetStackTraceAsStringPreText = preText;
 		lastGetStackTraceAsStringLineFeed = lineFeed;
 		lastGetStackTraceAsStringAppender = appender;
-		return nextStackTraceAsStringReturn;
-	}
-
-	public String getNextStackTraceAsStringReturn() {
-		return nextStackTraceAsStringReturn;
-	}
-
-	public void setNextStackTraceAsStringReturn(String nextStackTraceAsStringReturn) {
-		this.nextStackTraceAsStringReturn = nextStackTraceAsStringReturn;
 	}
 
 	public Throwable getLastFillInStackTraceThrowable() {
