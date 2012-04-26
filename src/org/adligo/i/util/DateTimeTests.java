@@ -1,10 +1,11 @@
-package org.adligo.i.util.client;
+package org.adligo.i.util;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.adligo.i.log.client.Log;
 import org.adligo.i.log.client.LogFactory;
+import org.adligo.i.util.client.DateTime;
 import org.adligo.tests.ATest;
 
 
