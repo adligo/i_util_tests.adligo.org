@@ -12,6 +12,14 @@ import org.adligo.tests.ATest;
 public class DateTimeTests extends ATest {
 	private static final Log log = LogFactory.getLog(DateTimeTests.class);
 
+	public void testStringConstructor() {
+		DateTime dt = new DateTime("01/29/2001 12:01 AM 000");
+		assertEquals(2001,dt.getYear());
+		assertEquals(1, dt.getMonth());
+		assertEquals(29, dt.getDayOfMonth());
+		
+	}
+	
 	public void testYear() {
 		DateTime dt = new DateTime(0);
 		assertEquals(1969,dt.getYear());
