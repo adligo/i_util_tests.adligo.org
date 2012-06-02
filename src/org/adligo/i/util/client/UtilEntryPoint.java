@@ -280,6 +280,9 @@ public class UtilEntryPoint implements EntryPoint {
 		addI_ThrowableHelper();
 		addI_Wrapper();
 		holder.addUsed(I_Immutable.class);
+		holder.addUsed(I_DateTimeParser.class);
+		holder.addUsed(DateTimeParserFactory.class);
+		
 		holder.addUsed(InstanceForName.class);
 		holder.addUsed(IteratorFactory.class);
 		holder.addUsed(new ListenerValueObject());
