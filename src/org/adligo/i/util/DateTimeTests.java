@@ -208,4 +208,24 @@ public class DateTimeTests extends ATest {
 		assertEquals(366, DateTime.getDaysInYear(2000));
 		assertEquals(365, DateTime.getDaysInYear(2001));
 	}
+	
+	/**
+	 * this test discovered that using ints as constants caused a 
+	 * multiplication constraint when using a month
+	 * so the constants ONE_DAY exc were changed to longs
+	 */
+	public void testDayRoll() {
+		long epoc = 0L;
+		long dayAfterEpoc = epoc + DateTime.ONE_DAY;
+		long dayBeforeEpoc = epoc - DateTime.ONE_DAY;
+		assertEquals("Wed Dec 31 18:00:00 CST 1969", new Date(epoc).toString());
+		assertEquals("Thu Jan 01 18:00:00 CST 1970", new Date(dayAfterEpoc).toString());
+		assertEquals("Tue Dec 30 18:00:00 CST 1969", new Date(dayBeforeEpoc).toString());
+		
+		long monthAfterEpoc = epoc + (DateTime.ONE_DAY * 30);
+		long monthBeforeEpoc = epoc - (DateTime.ONE_DAY * 30);
+		assertEquals("Fri Jan 30 18:00:00 CST 1970", new Date(monthAfterEpoc).toString());
+		assertEquals("Mon Dec 01 18:00:00 CST 1969", new Date(monthBeforeEpoc).toString());
+		
+	}
 }
