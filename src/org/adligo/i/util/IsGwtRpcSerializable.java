@@ -27,8 +27,6 @@ import com.google.gwt.user.client.rpc.SerializationException;
 import com.google.gwt.user.server.rpc.impl.LegacySerializationPolicy;
 
 public class IsGwtRpcSerializable  {
-	public static final String MUST_DIRECTLY_EXTEND_OBJECT_OR_BE_A_ENUM = " must directly extend Object or be a enum";
-	public static final String YOUR_GWT_RPC_SERIALIZABLE_CLASS = "Your Gwt Rpc Serializable class ";
 	private static final Log log = LogFactory.getLog(IsGwtRpcSerializable.class);
 	private static Set<Character> WHITE_SPACE_CHARACTERS = getWhiteSpaceChars();
 	private static Map<String,Class<?>> COMMON_CLASSES = getCommonClasses();
@@ -114,32 +112,7 @@ public class IsGwtRpcSerializable  {
 			}
 			return;
 		}
-		/**
-		 * I noticed after about 2 days of work that 
-		 * when the GWT RPC serialization does it's thing 
-		 * it only looks at the Fields of the class in question and not it's parents
-		 * 
-		 * So if you the following Classes
-		 *     Foo implements IsSerializable {
-		 *     	private String name;
-		 *     }
-		 *     
-		 *     Bar extends Foo implements IsSerializable {
-		 *     }
-		 *     
-		 *     and you pass Bar through RPC after setting the name to 'chris'
-		 *     it will show up on the other machine as null, Bug or Feature? 
-		 *     
-		 *     
-		 */
-		if (superClazz != Object.class) {
-			if (!clazz.isEnum()) {
-				SerializationException ex = new SerializationException(YOUR_GWT_RPC_SERIALIZABLE_CLASS +
-						clazz + MUST_DIRECTLY_EXTEND_OBJECT_OR_BE_A_ENUM);
-				ex.fillInStackTrace();
-				throw ex;
-			}
-		}
+
 		
 		IsGwtRpcBuilder builder = new IsGwtRpcBuilder();
 		builder.setCurrentClass(clazz);
