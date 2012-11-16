@@ -24,7 +24,9 @@ public class DateTimeTests extends ATest {
 	public void testDayStartEnd() {
 		DateTime dt = new DateTime(0);
 		assertEquals(-64800000L,dt.getDayStart());
-		assertEquals(21540999L,dt.getDayEnd());
+		assertEquals("12/31/1969 12:00 AM 000",new DateTime(dt.getDayStart()).toString());
+		assertEquals(21599999,dt.getDayEnd());
+		assertEquals("12/31/1969 11:59 PM 999",new DateTime(dt.getDayEnd()).toString());
 	}
 	
 	public void testYear() {
