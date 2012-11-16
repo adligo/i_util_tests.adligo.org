@@ -1,3 +1,4 @@
 Date,Package,Coverage,Instructions
 11/14/2012,org.adligo.i.util.client,69.1%,3433
 11/14/2012,org.adligo.jse.util,58.8%,983
+11/16/2012,org.adligo.i.util.client,71.6%,3489
