@@ -17,7 +17,7 @@ public class LineTextAssertions {
 				char a = actualChars[j];
 				if (c != a) {
 					Assert.assertEquals("the character on line " + i + " at character " + j +
-							" should match",example, actual);
+							" should match is '" + a + "' should be '" + c + "'",new String(exampleChars), new String(actualChars));
 				}
 			}
 			
