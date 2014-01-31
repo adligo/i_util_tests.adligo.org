@@ -7,3 +7,6 @@ gwt_test_reports/
 test_failure.properties
 gwt_test_output/
 emma_dir/
+gwt-unitCache/
+war/
+i_util_tests.jar
