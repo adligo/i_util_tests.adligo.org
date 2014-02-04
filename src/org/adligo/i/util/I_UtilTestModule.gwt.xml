@@ -1,10 +1,6 @@
 <module>
 	<inherits name="com.google.gwt.user.User"/>
-	<inherits name="org.adligo.i.util.I_Util"/>
-	
-	
-	
-	<entry-point class="org.adligo.i.util.client.UtilEntryPoint"/>	
+	<inherits name="org.adligo.i.util.I_Util"/>	
 </module>
 
 
