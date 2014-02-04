@@ -634,7 +634,7 @@ public class IsGwtRpcSerializable  {
 				}
 				sb2.append(tok.nextElement());
 			}
-			String all = absPath + sb2.toString() + ".java";
+			String all = absPath + File.separator + "src" + File.separator + sb2.toString() + ".java";
 			is = new FileInputStream(all);
 			
 		}

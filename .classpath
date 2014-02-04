@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry including="**/*.java" kind="src" path="src"/>
-	<classpathentry kind="src" path="src_runtime"/>
+	<classpathentry including="**/*.java|**/*.properties" kind="src" path="src"/>
+	<classpathentry including="**/*.properties" kind="src" path="src_runtime"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/i_util"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/i_log"/>
@@ -9,7 +9,7 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/adi"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/jse_util"/>
-		<classpathentry kind="var" path="MVN_REPO/com/google/gwt/gwt-user/2.5.0/gwt-user-2.5.0.jar"/>
-		<classpathentry kind="var" path="MVN_REPO/com/google/gwt/gwt-dev/2.5.0/gwt-dev-2.5.0.jar"/>
+	<classpathentry kind="var" path="MVN_REPO/com/google/gwt/gwt-user/2.5.0/gwt-user-2.5.0.jar"/>
+	<classpathentry kind="var" path="MVN_REPO/com/google/gwt/gwt-dev/2.5.0/gwt-dev-2.5.0.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

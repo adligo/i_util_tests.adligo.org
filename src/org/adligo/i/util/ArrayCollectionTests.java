@@ -171,6 +171,19 @@ public class ArrayCollectionTests extends ATest {
 		assertContent(col);
 	}
 	
+	public void testToArray() {
+		if (log.isDebugEnabled()) {
+			log.debug("starting testChunkSize2");
+		}
+		ArrayCollection col = new ArrayCollection(2);
+		col.add("Hey");
+		assertEquals(1, col.size());
+		Object [] objs = col.toArray();
+		assertEquals("Hey", objs[0]);
+		
+		
+	}
+	
 	public void testChunkSize10() {
 		if (log.isDebugEnabled()) {
 			log.debug("starting testChunkSize10");
@@ -199,5 +212,6 @@ public class ArrayCollectionTests extends ATest {
 		assertEquals("Should match ", 1001, col.get(1001));
 	}
 
+	
 
 }
