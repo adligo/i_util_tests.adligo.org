@@ -9,5 +9,5 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/adi"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/jse_util"/>
-	<classpathentry kind="output" path="war/WEB-INF/classes"/>
+	<classpathentry kind="output" path="classes"/>
 </classpath>
