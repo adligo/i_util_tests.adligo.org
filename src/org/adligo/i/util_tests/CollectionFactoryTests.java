@@ -24,7 +24,7 @@ public class CollectionFactoryTests extends TestCase {
 			ex = x;
 		}
 		assertNotNull(ex);
-		assertEquals("org.adligo.i.util.client.CollectionFactory the me variable is null?", 
+		assertEquals("org.adligo.i.util.shared.CollectionFactory the me variable is null?", 
 				ex.getMessage());
 		
 		assertFalse(CollectionFactory.isInit());
@@ -43,7 +43,7 @@ public class CollectionFactoryTests extends TestCase {
 			ex = x;
 		}
 		assertNotNull(ex);
-		assertEquals("org.adligo.i.util.client.CollectionFactory has already been initalized.", 
+		assertEquals("org.adligo.i.util.shared.CollectionFactory has already been initalized.", 
 				ex.getMessage());
 		
 		

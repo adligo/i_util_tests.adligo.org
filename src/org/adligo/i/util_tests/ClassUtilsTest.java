@@ -39,8 +39,8 @@ public class ClassUtilsTest extends ATest {
 	}
 	
 	public void testGetClassName() {
-		assertEquals("org.adligo.i.util.tests.ClassUtilsTest", ClassUtils.getClassName(ClassUtilsTest.class));
-		assertEquals("org.adligo.i.util.client.I_Collection", ClassUtils.getClassName(I_Collection.class));
+		assertEquals("org.adligo.i.util_tests.ClassUtilsTest", ClassUtils.getClassName(ClassUtilsTest.class));
+		assertEquals("org.adligo.i.util.shared.I_Collection", ClassUtils.getClassName(I_Collection.class));
 		
 	}
 }
