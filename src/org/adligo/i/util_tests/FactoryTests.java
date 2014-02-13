@@ -60,7 +60,7 @@ public class FactoryTests extends ATest implements I_Listener {
 	public void testPropertyFactory() {
 		lastReadException = null;
 		lastProperties = null;
-		PropertyFactory.get("/foo.properties", this);
+		PropertyFactory.get("/org/adligo/i/util_tests/foo.properties", this);
 		assertNull(lastReadException);
 		assertNotNull("j2SE util should perform" +
 				" a sync fetch of the foo.properties" +
@@ -78,7 +78,7 @@ public class FactoryTests extends ATest implements I_Listener {
 	
 		lastReadException = null;
 		lastProperties = null;
-		PropertyFactory.get("/bar.properties", this);
+		PropertyFactory.get("/org/adligo/i/util_tests/bar.properties", this);
 		assertNull(lastReadException);
 		assertNotNull("j2SE util should perform" +
 				" a sync fetch of the foo.properties" +
