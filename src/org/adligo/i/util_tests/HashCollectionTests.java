@@ -8,7 +8,10 @@ import org.adligo.i.log.shared.LogFactory;
 import org.adligo.i.util.shared.HashCollection;
 import org.adligo.i.util_tests.mocks.BadHashCode;
 import org.adligo.tests.ATest;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
+@RunWith(JUnit4.class)
 public class HashCollectionTests extends ATest {
 	private static final Log log = LogFactory.getLog(HashCollectionTests.class);
 	

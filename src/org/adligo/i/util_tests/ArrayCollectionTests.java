@@ -7,6 +7,8 @@ import org.adligo.i.util.shared.ArrayCollection;
 import org.adligo.i.util.shared.I_Collection;
 import org.adligo.i.util.shared.I_Iterator;
 import org.adligo.tests.ATest;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
 /**
  * this tests the ArrayCollection and
@@ -15,6 +17,7 @@ import org.adligo.tests.ATest;
  * @author scott
  *
  */
+@RunWith(JUnit4.class)
 public class ArrayCollectionTests extends ATest {
 	private static final Log log = LogFactory.getLog(ArrayCollectionTests.class);
 	public static final String CONSTANT = "dosen't change";

@@ -18,7 +18,10 @@ import org.adligo.i.util_tests.shared.MockIterator;
 import org.adligo.i.util_tests.shared.MockMap;
 import org.adligo.i.util_tests.shared.MockThreadPopulator;
 import org.adligo.jse.util.JSEPlatform;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
+@RunWith(JUnit4.class)
 public class ThreadPopulatorFactoryTests extends TestCase {
 	
 	public ThreadPopulatorFactoryTests() {

@@ -21,6 +21,8 @@ import org.adligo.i.util.shared.PropertyFactory;
 import org.adligo.i.util.shared.PropertyFileReadException;
 import org.adligo.jse.util.JSEPlatform;
 import org.adligo.tests.ATest;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
 import junit.framework.TestCase;
 
@@ -41,6 +43,7 @@ import junit.framework.TestCase;
  * @author scott
  *
  */
+@RunWith(JUnit4.class)
 public class FactoryTests extends ATest implements I_Listener {
 	private static final Log log = LogFactory.getLog(FactoryTests.class);
 	

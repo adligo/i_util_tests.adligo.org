@@ -9,7 +9,10 @@ import org.adligo.i.util.shared.MapFactory;
 import org.adligo.i.util.shared.StringUtils;
 import org.adligo.jse.util.MapWrapper;
 import org.adligo.tests.ATest;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
+@RunWith(JUnit4.class)
 public class StringUtilsTests extends ATest {
 
 	public void testEqualsIgnoreCase() {

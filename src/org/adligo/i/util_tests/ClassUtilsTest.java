@@ -5,7 +5,10 @@ import java.io.Serializable;
 import org.adligo.i.util.shared.ClassUtils;
 import org.adligo.i.util.shared.I_Collection;
 import org.adligo.tests.ATest;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
+@RunWith(JUnit4.class)
 public class ClassUtilsTest extends ATest {
 
 	public void testTypeOf() {

@@ -8,7 +8,10 @@ import org.adligo.i.util_tests.mocks.MockCollectionFactory;
 import org.adligo.i.util_tests.shared.MockCollection;
 import org.adligo.jse.util.JSECollectionFactory;
 import org.adligo.jse.util.JSEPlatform;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
+@RunWith(JUnit4.class)
 public class CollectionFactoryTests extends TestCase {
 
 	public CollectionFactoryTests() {

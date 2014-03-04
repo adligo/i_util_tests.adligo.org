@@ -10,7 +10,10 @@ import org.adligo.i.util_tests.mocks.MockMapFactory.INIT_TYPES;
 import org.adligo.i.util_tests.shared.MockImmutableMap;
 import org.adligo.i.util_tests.shared.MockMap;
 import org.adligo.jse.util.JSEPlatform;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
+@RunWith(JUnit4.class)
 public class MapFactoryTests extends TestCase {
 
 	public MapFactoryTests() {

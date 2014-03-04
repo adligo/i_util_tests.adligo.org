@@ -9,9 +9,12 @@ import org.adligo.i.util_tests.mocks.MockIteratorFactory;
 import org.adligo.i.util_tests.shared.MockCollection;
 import org.adligo.i.util_tests.shared.MockIterator;
 import org.adligo.jse.util.JSEPlatform;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
 import junit.framework.TestCase;
 
+@RunWith(JUnit4.class)
 public class IteratorFactoryTests extends TestCase {
 
 	public IteratorFactoryTests() {
