@@ -1,6 +1,6 @@
 package org.adligo.i.util_tests.utils;
 
-import org.adligo.tests.I_Test;
+import org.adligo.tests.shared.I_Test;
 
 
 public class LineTextAssertions {
