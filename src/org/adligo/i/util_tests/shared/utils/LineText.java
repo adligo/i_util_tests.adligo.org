@@ -1,4 +1,4 @@
-package org.adligo.i.util_tests.utils;
+package org.adligo.i.util_tests.shared.utils;
 
 import java.util.ArrayList;
 import java.util.List;

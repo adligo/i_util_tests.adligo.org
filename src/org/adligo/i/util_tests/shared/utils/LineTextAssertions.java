@@ -1,13 +1,15 @@
-package org.adligo.i.util_tests.utils;
+package org.adligo.i.util_tests.shared.utils;
 
-import org.adligo.tests.shared.I_Test;
+import org.adligo.tests.shared.AAssertions;
 
 
-public class LineTextAssertions {
-	public static void compaireFileText(String example, String actual, I_Test test) {
+public class LineTextAssertions extends AAssertions {
+	private String packageName;
+	
+	public void compaireFileText(String example, String actual) {
 		LineText exampleLT = new LineText(example);
 		LineText actualLT = new LineText(actual);
-		test.assertIsEquals("The number of lines should match expected ",
+		assertEquals("The number of lines should match expected ",
 				 exampleLT.getLines(), actualLT.getLines());
 		
 		for (int i = 0; i < exampleLT.getLines(); i++) {
@@ -17,13 +19,22 @@ public class LineTextAssertions {
 				char c = exampleChars[j];
 				char a = actualChars[j];
 				if (c != a) {
-					test.assertIsEquals("the character on line " + i + " at character " + j +
+					assertEquals("the character on line " + i + " at character " + j +
 							" should match is '" + a + "' should be '" + c + "'",new String(exampleChars), new String(actualChars));
 				}
 			}
 			
-			test.assertIsEquals("The characters in line " + i + " should match ", 
+			assertEquals("The characters in line " + i + " should match ", 
 					exampleChars.length, actualChars.length);
 		}
+	}
+
+	@Override
+	public String getPackage() {
+		return packageName;
+	}
+
+	public void setPackage(String p) {
+		packageName = p;
 	}
 }
