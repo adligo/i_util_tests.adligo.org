@@ -5,7 +5,7 @@ import org.adligo.tests.shared.AAssertions;
 
 public class LineTextAssertions  {
 	
-	public void compaireFileText(String example, String actual, AAssertions assertions) {
+	public static void compaireFileText(String example, String actual, AAssertions assertions) {
 		LineText exampleLT = new LineText(example);
 		LineText actualLT = new LineText(actual);
 		assertions.assertEquals("The number of lines should match expected ",
