@@ -10,3 +10,5 @@ emma_dir/
 gwt-unitCache/
 war/
 i_util_tests.jar
+/adligo_runner.log
+/adligo_runner.properties
