@@ -1,67 +1,38 @@
 package org.adligo.i.util_tests;
 
-import java.io.Serializable;
-
 import org.adligo.i.util.shared.ClassUtils;
-import org.adligo.i.util.shared.I_Collection;
+import org.adligo.i.util_tests.shared.ClassUtilsAssertions;
 import org.adligo.tests.ATest;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 @RunWith(JUnit4.class)
 public class ClassUtilsTest extends ATest {
-
+	private ClassUtilsAssertions asserts = new ClassUtilsAssertions();
+	
+	public ClassUtilsTest() {
+		asserts.setTest(this);
+	}
+	
+	@Override
+	public String getScope() {
+		return ClassUtils.class.getName();
+	}
+	
+	@Test
 	public void testTypeOf() {
-		String s = new String();
-		
-		String className = ClassUtils.getClassName(
-				s.getClass());
-		assertEquals("The class names should match",
-				"java.lang.String", className);
-		
-		assertTrue("object s should be a type of String",
-				ClassUtils.typeOf(s, String.class));
-		
-		
-		MockClass o  = new MockClass();
-		assertTrue("object s should be a type of MockClass",
-				ClassUtils.typeOf(o, MockClass.class));
-		assertFalse("object s should NOT be a type of Serializable",
-				ClassUtils.typeOf(o, Serializable.class));
-		assertFalse("object s should NOT be a type of MockClass2",
-				ClassUtils.typeOf(o, MockClass2.class));
-	
-	
+		asserts.typeOfAsserts();
 	}
 		
-	
+	@Test
 	public void testClassShortName() {
-		String shortName = ClassUtils.getClassShortName(this.getClass());
-		assertEquals("ClassUtilsTest", shortName);
-		
+		asserts.classShortNameAsserts();
 	}
 	
+	@Test
 	public void testGetClassName() {
-		assertEquals("org.adligo.i.util_tests.ClassUtilsTest", ClassUtils.getClassName(ClassUtilsTest.class));
-		assertEquals("org.adligo.i.util.shared.I_Collection", ClassUtils.getClassName(I_Collection.class));
-		
+		asserts.getClassNameAsserts();
 	}
 }
 
-class MockClass implements Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	
-}
-
-class MockClass2 extends MockClass {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	
-}

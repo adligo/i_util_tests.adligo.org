@@ -1,4 +1,4 @@
-package org.adligo.i.util_tests;
+package org.adligo.i.util_tests.shared.mocks;
 
 import junit.framework.TestCase;
 

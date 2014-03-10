@@ -1,4 +1,4 @@
-package org.adligo.i.util_tests.mocks;
+package org.adligo.i.util_tests.shared.mocks;
 
 public class BadHashCode {
 	private int count;

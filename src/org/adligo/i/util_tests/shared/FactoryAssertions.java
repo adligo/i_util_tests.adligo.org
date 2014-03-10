@@ -1,8 +1,9 @@
-package org.adligo.i.util_tests;
+package org.adligo.i.util_tests.shared;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -19,12 +20,7 @@ import org.adligo.i.util.shared.IteratorFactory;
 import org.adligo.i.util.shared.MapFactory;
 import org.adligo.i.util.shared.PropertyFactory;
 import org.adligo.i.util.shared.PropertyFileReadException;
-import org.adligo.jse.util.JSEPlatform;
-import org.adligo.tests.ATest;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
-
-import junit.framework.TestCase;
+import org.adligo.tests.shared.AAssertions;
 
 /**
  * this tests the i_util Factory classes
@@ -43,24 +39,14 @@ import junit.framework.TestCase;
  * @author scott
  *
  */
-@RunWith(JUnit4.class)
-public class FactoryTests extends ATest implements I_Listener {
-	private static final Log log = LogFactory.getLog(FactoryTests.class);
+public class FactoryAssertions extends AAssertions implements I_Listener {
+	private static final Log log = LogFactory.getLog(FactoryAssertions.class);
 	
 	PropertyFileReadException lastReadException;
 	I_Map lastProperties;
 	
-	public void setUp() throws Exception {
-		JSEPlatform.init();
-	}
-	
-	/**
-	 * note I have found this test to fail sometimes in eclipse
-	 * you may need to add the src folder to your JUnit classpath
-	 * under the Classpath tab, user entries tree node
-	 */
 	@SuppressWarnings("unchecked")
-	public void testPropertyFactory() {
+	public void propertyFactoryAssertions() {
 		lastReadException = null;
 		lastProperties = null;
 		PropertyFactory.get("/org/adligo/i/util_tests/foo.properties", this);
@@ -70,11 +56,11 @@ public class FactoryTests extends ATest implements I_Listener {
 				" file and call back this class",
 				lastProperties);
 		
-		Map props = (Map) lastProperties.getWrapped();
+		Map<String,String> props = (Map<String,String>) lastProperties.getWrapped();
 		if (log.isDebugEnabled()) {
 			log.debug(" props " + props);
 		}
-		Set keys = props.keySet();
+		Set<String> keys = props.keySet();
 		assertTrue("keys should contain foo ", keys.contains("foo"));
 		assertEquals("last properties should have foo=bar",
 				"bar", lastProperties.get("foo"));
@@ -88,7 +74,7 @@ public class FactoryTests extends ATest implements I_Listener {
 				" file and call back this class",
 				lastProperties);
 		
-		props = (Map) lastProperties.getWrapped();
+		props = (Map<String,String>) lastProperties.getWrapped();
 		if (log.isDebugEnabled()) {
 			log.debug(" props " + props);
 		}
@@ -112,8 +98,7 @@ public class FactoryTests extends ATest implements I_Listener {
 	
 	
 	
-	@SuppressWarnings("unchecked")
-	public void testMapFactory() {
+	public void mapFactoryAsserts() {
 		I_Map map = MapFactory.create();
 		assertNotNull("j2SE util should perform" +
 				"a sync creation of I_Map",
@@ -137,7 +122,7 @@ public class FactoryTests extends ATest implements I_Listener {
 		assertEquals("there should be a key value in the outMap",
 				"value", outMap.get("key"));
 		
-		HashMap inMap = new HashMap();
+		Map<String,String> inMap = new HashMap<String,String>();
 		inMap.put("key2", "value2");
 		I_Map out2 = MapFactory.get(inMap);
 		assertEquals("there should be a key value2 in the out2 Map",
@@ -145,8 +130,7 @@ public class FactoryTests extends ATest implements I_Listener {
 		
 	}
 	
-	@SuppressWarnings("unchecked")
-	public void testCollectionFactory() {
+	public void collectionFactoryAsserts() {
 		
 		I_Collection coll = CollectionFactory.create();
 		assertNotNull("j2SE util should perform" +
@@ -160,7 +144,7 @@ public class FactoryTests extends ATest implements I_Listener {
 				"collection each time",
 				coll2 != coll);
 		
-		ArrayList inList = new ArrayList();
+		List<String> inList = new ArrayList<String>();
 		I_Collection outColl = CollectionFactory.get(inList);
 		assertNotNull("The wrapped collection should not be null",
 				outColl);
@@ -168,9 +152,9 @@ public class FactoryTests extends ATest implements I_Listener {
 				, inList, outColl.getWrapped());
 	}
 
-	public void testIteratorFactory() {
+	public void iteratorFactoryAsserts() {
 		
-		Collection col = new ArrayList();
+		Collection<String> col = new ArrayList<String>();
 		col.add("key");
 		
 		I_Iterator it = IteratorFactory.create(col);

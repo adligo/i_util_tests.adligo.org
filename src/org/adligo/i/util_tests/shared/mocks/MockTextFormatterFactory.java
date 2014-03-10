@@ -1,4 +1,4 @@
-package org.adligo.i.util_tests.mocks;
+package org.adligo.i.util_tests.shared.mocks;
 
 import org.adligo.i.util.shared.I_Factory;
 import org.adligo.i.util.shared.TextFormatter;

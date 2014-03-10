@@ -1,70 +1,44 @@
 package org.adligo.i.util_tests;
 
-import org.adligo.i.util.shared.CollectionFactory;
-import org.adligo.i.util.shared.I_Collection;
-import org.adligo.i.util.shared.I_Iterator;
 import org.adligo.i.util.shared.IteratorFactory;
-import org.adligo.i.util_tests.mocks.MockCollectionFactory;
-import org.adligo.i.util_tests.mocks.MockIteratorFactory;
-import org.adligo.i.util_tests.shared.MockCollection;
-import org.adligo.i.util_tests.shared.MockIterator;
+import org.adligo.i.util_tests.shared.IteratorFactoryAssertions;
+import org.adligo.i.util_tests.shared.mocks.MockIteratorFactory;
 import org.adligo.jse.util.JSEPlatform;
+import org.adligo.tests.ATest;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-import junit.framework.TestCase;
-
 @RunWith(JUnit4.class)
-public class IteratorFactoryTests extends TestCase {
-
+public class IteratorFactoryTests extends ATest {
+	private IteratorFactoryAssertions asserts = new IteratorFactoryAssertions();
+	
 	public IteratorFactoryTests() {
-		super("org.adligo.i.util.IteratorFactoryTests");
+		asserts.setTest(this);
 	}
-	public void testIteratorFactoryTests() throws Exception {
-		
-		assertFalse(IteratorFactory.isInit());
-		Exception ex = null;
-		try {
-			new MockIteratorFactory(true);
-		} catch (Exception x) {
-			ex = x;
-		}
-		assertNotNull(ex);
-		assertEquals("IteratorFactory needs a non null factory argument.", 
-				ex.getMessage());
-		
-		assertFalse(IteratorFactory.isInit());
-		
-		
-		new MockIteratorFactory();
-		
-		assertTrue(IteratorFactory.isInit());
-		I_Iterator it = IteratorFactory.create(new MockCollection());
-		assertTrue(it instanceof MockIterator);
-		
-		ex = null;
-		try {
-			new MockIteratorFactory();
-		} catch (Exception x) {
-			ex = x;
-		}
-		assertNotNull(ex);
-		assertEquals("IteratorFactory was already initialized.", 
-				ex.getMessage());
-		
-		
-		
-	}
+	
 	@Override
-	protected void setUp() throws Exception {
+	public String getScope() {
+		return IteratorFactory.class.getName();
+	}
+	
+	@Before
+	public void setUp() throws Exception {
 		super.setUp();
 		MockIteratorFactory.uninit();
 		
 	}
-	@Override
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		super.tearDown();
 		MockIteratorFactory.uninit();
 		JSEPlatform.init();
+	}
+	
+	@Test
+	public void testIteratorFactoryTests() throws Exception {
+		asserts.iteratorFactoryAsserts();
 	}
 }

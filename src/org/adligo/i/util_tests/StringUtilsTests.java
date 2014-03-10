@@ -1,126 +1,74 @@
 package org.adligo.i.util_tests;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-
-import org.adligo.i.util.shared.I_Map;
-import org.adligo.i.util.shared.MapFactory;
 import org.adligo.i.util.shared.StringUtils;
-import org.adligo.jse.util.MapWrapper;
+import org.adligo.i.util_tests.shared.StringUtilsAssertions;
 import org.adligo.tests.ATest;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 @RunWith(JUnit4.class)
 public class StringUtilsTests extends ATest {
-
-	public void testEqualsIgnoreCase() {
-		String a = "a";
-		String b = "b";
-		String aA = "A";
-		
-		assertTrue(StringUtils.equalsIgnoreCase(null, null));
-		assertFalse(StringUtils.equalsIgnoreCase(null, a));
-		assertFalse(StringUtils.equalsIgnoreCase(a, null));
-		assertFalse(StringUtils.equalsIgnoreCase(null, a));
-		assertTrue(StringUtils.equalsIgnoreCase(aA, a));
-		assertTrue(StringUtils.equalsIgnoreCase(a, aA));
+	private StringUtilsAssertions asserts = new StringUtilsAssertions();
+	
+	public StringUtilsTests() {
+		asserts.setTest(this);
 	}
 	
+	@Override
+	public String getScope() {
+		return StringUtils.class.getName();
+	}
+	
+	@Test
+	public void testEqualsIgnoreCase() {
+		asserts.equalsIgnoreCaseAsserts();
+	}
+	
+	@Test
 	public void testEmpty() {
 		GCTracker mem = new GCTracker(StringUtils.class, "testEmpty");
-		
-		String s = null;
-		assertTrue("null should be empty ", StringUtils.isEmpty(s));
-		s = "";
-		assertTrue("empty string should be empty ", StringUtils.isEmpty(s));
-		s = "1";
-		assertFalse("1 should NOT be empty ", StringUtils.isEmpty(s));
-		s = null;
-		
-		//class loading of StringUtils?
+		asserts.emptyAsserts();
 		mem.assertUse(3000);
 	}
 	
-	@SuppressWarnings("unchecked")
+	@Test
 	public void testNoLineFeedParsing() {
 		GCTracker mem = new GCTracker(this.getClass(), "testUnixParsing");
-		
-		String fileContent = "foo=bar";
-		MapWrapper mw = new MapWrapper(new HashMap());
-		StringUtils.parse(fileContent, mw);
-		Map map = (Map) mw.getWrapped();
-		Set keys = map.keySet();
-		
-		assertTrue("Should contain foo", keys.contains("foo"));
-		assertEquals("Should contain value bar for key foo", 
-				"bar",map.get("foo"));
-		
+		asserts.noLineFeedParsingAsserts();
 		mem.assertUse(3000);
 	}
 	
+	@Test
 	public void testUnixParsing() {
 		GCTracker mem = new GCTracker(this.getClass(), "testUnixParsing");
-		
-		String fileContent = "hey=hey_val\nhe=she\nyou=hime\n\n";
-		assertParsing(fileContent);
+		asserts.unixParsingAsserts();
 		mem.assertUse(3000);
 	}
 	
+	@Test
 	public void testDosParsing() {
 		GCTracker mem = new GCTracker(this.getClass(), "testUnixParsing");
-		
-		String fileContent = "hey=hey_val\rhe=she\ryou=hime\r\r";
-		assertParsing(fileContent);
+		asserts.dosParsingAsserts();
 		mem.assertUse(3000);
 	}
 
+	@Test
 	public void testMixedParsing() {
 		GCTracker mem = new GCTracker(this.getClass(), "testUnixParsing");
-		
-		String fileContent = "hey=hey_val\r\nhe=she\r\nyou=hime\r\n\r\n";
-		assertParsing(fileContent);
-		//switch
-		fileContent = "hey=hey_val\n\rhe=she\n\ryou=hime\n\r\n\r";
-		assertParsing(fileContent);
+		asserts.mixedParsingAsserts();
 		mem.assertUse(3000);
 	}
 	
+	@Test
 	public void testEmptyParsing() {
-		I_Map map = MapFactory.create();
-		String fileContent = "\n\r\n=him\n\r=\n\r";
-		StringUtils.parse(fileContent, map);
-		
-		assertEquals("" + map, 0, map.size());
-		
+		asserts.emptyParsingAsserts();
 	}
 	
-	@SuppressWarnings("unchecked")
-	private void assertParsing(String fileContent) {
-		MapWrapper mw = new MapWrapper(new HashMap());
-		StringUtils.parse(fileContent, mw);
-		Map map = (Map) mw.getWrapped();
-		Set keys = map.keySet();
-		
-		assertTrue("Should contain hey", keys.contains("hey"));
-		assertTrue("Should contain he", keys.contains("he"));
-		assertTrue("Should contain you", keys.contains("you"));
-		assertEquals("The size should be 3", 3, map.size());
-		
-		assertEquals("The value should match", "hey_val", map.get("hey"));
-		assertEquals("The value should match", "she", map.get("he"));
-		assertEquals("The value should match", "hime", map.get("you"));
-		
-		fileContent = null;
-		mw = null;
-		map = null;
-		keys = null;
-	}
-	
+	@Test
 	public void testLastIndexOf() {
-		String domain = "zeuhl.adligo.com";
-		int index = StringUtils.lastIndexOf(domain, '.');
-		assertEquals(12, index);
+		asserts.lastIndexOfAsserts();
 	}
+
+	
 }

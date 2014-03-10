@@ -1,79 +1,38 @@
 package org.adligo.i.util_tests;
 
-import junit.framework.TestCase;
-
-import org.adligo.i.util.shared.I_Event;
-import org.adligo.i.util.shared.I_Iterator;
-import org.adligo.i.util.shared.I_Listener;
-import org.adligo.i.util.shared.I_Map;
-import org.adligo.i.util.shared.I_ThreadPopulator;
-import org.adligo.i.util.shared.IteratorFactory;
-import org.adligo.i.util.shared.PropertyFactory;
 import org.adligo.i.util.shared.ThreadPopulatorFactory;
-import org.adligo.i.util_tests.mocks.MockIteratorFactory;
-import org.adligo.i.util_tests.mocks.MockPropertyFactory;
-import org.adligo.i.util_tests.mocks.MockThreadPopulatorFactory;
-import org.adligo.i.util_tests.shared.MockCollection;
-import org.adligo.i.util_tests.shared.MockIterator;
-import org.adligo.i.util_tests.shared.MockMap;
-import org.adligo.i.util_tests.shared.MockThreadPopulator;
+import org.adligo.i.util_tests.shared.ThreadPopulatorFactoryAssertions;
+import org.adligo.i.util_tests.shared.mocks.MockThreadPopulatorFactory;
 import org.adligo.jse.util.JSEPlatform;
+import org.adligo.tests.ATest;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 @RunWith(JUnit4.class)
-public class ThreadPopulatorFactoryTests extends TestCase {
+public class ThreadPopulatorFactoryTests extends ATest {
+	public ThreadPopulatorFactoryAssertions assertions = new ThreadPopulatorFactoryAssertions();
 	
 	public ThreadPopulatorFactoryTests() {
-		super("org.adligo.i.util.ThreadPopulatorFactoryTests");
+		assertions.setTest(this);
 	}
-	public void testPropertyFactory() throws Exception {
-		
-		assertFalse(ThreadPopulatorFactory.isInit());
-		Exception ex = null;
-		try {
-			new MockThreadPopulatorFactory(true);
-		} catch (Exception x) {
-			ex = x;
-		}
-		assertNotNull(ex);
-		assertEquals("ThreadPopulatorFactory needs a non null I_ThreadPopulator argument.", 
-				ex.getMessage());
-		
-		assertFalse(ThreadPopulatorFactory.isInit());
-		
-		new MockThreadPopulatorFactory();
-		
-		
-		assertTrue(ThreadPopulatorFactory.isInit());
-		I_ThreadPopulator pop = ThreadPopulatorFactory.getThreadPopulator();
-		
-		
-		assertTrue(pop instanceof MockThreadPopulator);
-		
-		ex = null;
-		try {
-			new MockThreadPopulatorFactory();
-		} catch (Exception x) {
-			ex = x;
-		}
-		assertNotNull(ex);
-		assertEquals("ThreadPopulatorFactory was already initialized.", 
-				ex.getMessage());
-		
-		
-		
-	}
+	
 	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
-		MockThreadPopulatorFactory.uninit();
-		
+	public String getScope() {
+		return ThreadPopulatorFactory.class.getName();
 	}
-	@Override
-	protected void tearDown() throws Exception {
-		super.tearDown();
+	
+	@Before
+	public void setUp() throws Exception {
 		MockThreadPopulatorFactory.uninit();
-		JSEPlatform.init();
 	}
+	
+	
+	@Test
+	public void testThreadPopulatorFactor() throws Exception {
+		assertions.threadFactoryAssertions();
+	}
+
 }
