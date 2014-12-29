@@ -2,12 +2,12 @@
 <classpath>
 	<classpathentry including="**/*.java|**/*.properties" kind="src" path="src"/>
 	<classpathentry including="**/*.properties" kind="src" path="src_runtime"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/i_util"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/i_log"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/i_util.adligo.org"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/i_log.adligo.org"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/tests"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/jse_util"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/jse_util.adligo.org"/>
 	<classpathentry kind="var" path="MVN_REPO/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar"/>
-        <classpathentry kind="var" path="MVN_REPO/junit/junit/5.0-ADLIGO-RC0/junit-5.0-ADLIGO-RC0.jar"/>
+	<classpathentry kind="var" path="MVN_REPO/junit/junit/5.0-ADLIGO-RC0/junit-5.0-ADLIGO-RC0.jar"/>
 	<classpathentry kind="output" path="classes"/>
 </classpath>
