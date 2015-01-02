@@ -20,13 +20,7 @@ public class DateTimeTests extends ATest {
 	public DateTimeTests() {
 		asserts.setTest(this);
 	}
-	
-	@Override
-	public String getScope() {
-		// TODO Auto-generated method stub
-		return DateTime.class.getName();
-	}
-	
+
 	@Test
 	public void testStringConstructor() {
 		asserts.stringConstructorAssertions();

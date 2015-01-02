@@ -18,12 +18,7 @@ public class TextFormatterTests extends ATest {
 	public TextFormatterTests() {
 		assertions.setTest(this);
 	}
-	
-	@Override
-	public String getScope() {
-		return TextFormatter.class.getName();
-	}
-	
+
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();

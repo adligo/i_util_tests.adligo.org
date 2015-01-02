@@ -15,11 +15,6 @@ public class StringUtilsTests extends ATest {
 		asserts.setTest(this);
 	}
 	
-	@Override
-	public String getScope() {
-		return StringUtils.class.getName();
-	}
-	
 	@Test
 	public void testEqualsIgnoreCase() {
 		asserts.equalsIgnoreCaseAsserts();

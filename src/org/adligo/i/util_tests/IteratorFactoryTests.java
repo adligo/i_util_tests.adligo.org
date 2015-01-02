@@ -18,12 +18,7 @@ public class IteratorFactoryTests extends ATest {
 	public IteratorFactoryTests() {
 		asserts.setTest(this);
 	}
-	
-	@Override
-	public String getScope() {
-		return IteratorFactory.class.getName();
-	}
-	
+
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();

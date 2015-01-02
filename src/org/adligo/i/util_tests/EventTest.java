@@ -15,12 +15,6 @@ public class EventTest extends ATest {
 		asserts.setTest(this);
 	}
 	
-	@Override
-	public String getScope() {
-		// TODO Auto-generated method stub
-		return Event.class.getName();
-	}
-	
 	@Test
 	public void eventAssertions() {
 		asserts.eventAssertions();

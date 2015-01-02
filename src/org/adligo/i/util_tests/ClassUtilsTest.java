@@ -14,12 +14,7 @@ public class ClassUtilsTest extends ATest {
 	public ClassUtilsTest() {
 		asserts.setTest(this);
 	}
-	
-	@Override
-	public String getScope() {
-		return ClassUtils.class.getName();
-	}
-	
+
 	@Test
 	public void testTypeOf() {
 		asserts.typeOfAsserts();

@@ -14,12 +14,7 @@ public class ArrayIteratorTests extends ATest {
 	public ArrayIteratorTests() {
 		asserts.setTest(this);
 	}
-	
-	@Override
-	public String getScope() {
-		return ArrayIterator.class.getName();
-	}
-	
+
 	@Test
 	public void testEmptyArrayIterator() {
 		asserts.emptyArrayIteratorAssertions();

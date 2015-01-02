@@ -15,11 +15,6 @@ public class HashCollectionTests extends ATest {
 		asserts.setTest(this);
 	}
 	
-	@Override
-	public String getScope() {
-		return HashCollection.class.getName();
-	}
-	
 	@Test
 	public void testLessThanOneHundred() {
 		asserts.lessThanOneHundredAsserts();

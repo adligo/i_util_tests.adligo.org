@@ -19,11 +19,6 @@ public class ThreadPopulatorFactoryTests extends ATest {
 		assertions.setTest(this);
 	}
 	
-	@Override
-	public String getScope() {
-		return ThreadPopulatorFactory.class.getName();
-	}
-	
 	@Before
 	public void setUp() throws Exception {
 		MockThreadPopulatorFactory.uninit();

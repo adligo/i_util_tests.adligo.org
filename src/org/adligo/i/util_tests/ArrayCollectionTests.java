@@ -22,12 +22,7 @@ public class ArrayCollectionTests extends ATest {
 	public ArrayCollectionTests() {
 		asserts.setTest(this);
 	}
-	
-	@Override
-	public String getScope() {
-		return ArrayCollection.class.getName();
-	}
-	
+
 	@Test
 	public void testAddRemoveAndClear() {
 		asserts.addRemoveAndClearAsserts();

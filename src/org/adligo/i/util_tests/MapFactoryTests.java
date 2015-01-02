@@ -19,11 +19,6 @@ public class MapFactoryTests extends ATest {
 		asserts.setTest(this);
 	}
 	
-	@Override
-	public String getScope() {
-		return MapFactory.class.getName();
-	}
-	
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();

@@ -19,11 +19,6 @@ public class PropertyFactoryTests extends ATest {
 		asserts.setTest(this);
 	}
 	
-	@Override
-	public String getScope() {
-		return PropertyFactory.class.getName();
-	}
-	
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();

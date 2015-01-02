@@ -3,7 +3,9 @@
     xmlns:lns="http://www.adligo.org/fabricate/xml/io/library/v1_0" 
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
     <tns:stages>
-        <tns:stage name="jar" />
+        <lns:stage name="jar" />
+        <lns:stage name="test" />
+        <lns:stage name="publish" />
     </tns:stages>
     <lns:dependencies>
         <lns:library>junit</lns:library>
